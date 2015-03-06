@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block form %}
+    <form method="post" action=".">
+        {% csrf_token %}
+        
+        {{ form.as_div }}
+
+        <button type="submit" class="icon-rocket2" id="submit-button" value="Log in">
+            <span class="button-text">login</span>
+        </button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+{% endblock %}
