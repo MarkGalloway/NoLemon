@@ -7,26 +7,26 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
-    
+
     username = models.CharField('username', max_length=30, unique=True,
         help_text= 'Required. 30 characters or fewer. Letters, digits and ./_ only.',
         validators=[
             validators.RegexValidator(r'^[\w.]+$', '*invalid characters', 'invalid')
         ])
-    
+
     email = models.EmailField('email address', blank=False, unique=True)
-    
+
     first_name = models.CharField('first name', max_length=30, blank=True)
-    
+
     last_name = models.CharField('last name', max_length=30, blank=True)
-    
+
     is_staff = models.BooleanField('admin status', default=False,
         help_text='Gives admin access to the site.')
-    
+
     is_active = models.BooleanField('active', default=True,
         help_text='Designates whether this user should be treated as '
                     'active. Unselect this instead of deleting accounts.')
-    
+
     date_joined = models.DateTimeField('date joined', default=timezone.now)
 
     objects = UserManager()
