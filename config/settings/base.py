@@ -1,5 +1,6 @@
 """
-Django settings for NoLemon project.
+Django base settings for NoLemon project.
+Intended to be inherited by one of the other settings files.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -7,6 +8,7 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -16,13 +18,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xm$%y(&o%uza#ei3+je-s3xjy2tl_0ho#rnxp!+jj01xby01vh'
+from django.core.exceptions import ImproperlyConfigured
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# JSON-based secrets module
+with open("secrets.json") as f:
+    secrets = json.loads(f.read())
 
-TEMPLATE_DEBUG = True
+
+def get_secret(setting, secrets=secrets):
+    """
+    Get the secret variable or return explicit exception.
+    """
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Could not load {0} from secrets file.".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret("SECRET_KEY")
 
 ALLOWED_HOSTS = []
 
@@ -38,7 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'core',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,9 +65,9 @@ MIDDLEWARE_CLASSES = (
     'audit_log.middleware.UserLoggingMiddleware',
 )
 
-ROOT_URLCONF = 'NoLemon.urls'
+ROOT_URLCONF = 'config.urls'
 
-WSGI_APPLICATION = 'NoLemon.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
