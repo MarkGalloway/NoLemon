@@ -12,6 +12,8 @@ class Model(models.Model):
     model_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
     history = HistoricalRecords()
 
+    def __str__(self):
+        return self.model_type
 
 
 class Make(models.Model):
@@ -21,6 +23,8 @@ class Make(models.Model):
     make_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
     history = HistoricalRecords()
 
+    def __str__(self):
+        return self.make_type
 
 
 class Trim(models.Model):
@@ -30,6 +34,8 @@ class Trim(models.Model):
     trim_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
     history = HistoricalRecords()
 
+    def __str__(self):
+        return self.trim_type
 
 
 class Body(models.Model):
@@ -39,6 +45,8 @@ class Body(models.Model):
     body_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
     history = HistoricalRecords()
 
+    def __str__(self):
+        return self.body_type
 
 
 class Transmission(models.Model):
@@ -48,6 +56,8 @@ class Transmission(models.Model):
     transmission_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
     history = HistoricalRecords()
 
+    def __str__(self):
+        return self.transmission_type
 
 
 class Fuel(models.Model):
@@ -57,6 +67,8 @@ class Fuel(models.Model):
     fuel_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
     history = HistoricalRecords()
 
+    def __str__(self):
+        return self.fuel_type
 
 
 class BasicColour(models.Model):
@@ -66,6 +78,8 @@ class BasicColour(models.Model):
     colour_name = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
     history = HistoricalRecords()
 
+    def __str__(self):
+        return self.colour_name
 
 
 class Colour(models.Model):
@@ -76,6 +90,8 @@ class Colour(models.Model):
     basic_colour = models.ForeignKey(BasicColour, related_name="basic_colour")
     history = HistoricalRecords()
 
+    def __str__(self):
+        return self.colour_name
 
 
 class Vehicle(models.Model):
