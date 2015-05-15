@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
-from audit_log.models.managers import AuditLog
+from simple_history.models import HistoricalRecords
 
 
 class Model(models.Model):
@@ -10,8 +10,8 @@ class Model(models.Model):
     Model representation for a `model` instance of a vehicle
     """
     model_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+    history = HistoricalRecords()
 
-    audit_log = AuditLog()
 
 
 class Make(models.Model):
@@ -19,8 +19,8 @@ class Make(models.Model):
     Model representation for a `make` instance of a vehicle
     """
     make_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+    history = HistoricalRecords()
 
-    audit_log = AuditLog()
 
 
 class Trim(models.Model):
@@ -28,8 +28,8 @@ class Trim(models.Model):
     Model representation for a `trim` instance of a vehicle
     """
     trim_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+    history = HistoricalRecords()
 
-    audit_log = AuditLog()
 
 
 class Body(models.Model):
@@ -37,8 +37,8 @@ class Body(models.Model):
     Model representation for a `body` instance of a vehicle
     """
     body_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+    history = HistoricalRecords()
 
-    audit_log = AuditLog()
 
 
 class Transmission(models.Model):
@@ -46,8 +46,8 @@ class Transmission(models.Model):
     Model representation for a `transmission` instance of a vehicle
     """
     transmission_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+    history = HistoricalRecords()
 
-    audit_log = AuditLog()
 
 
 class Fuel(models.Model):
@@ -55,8 +55,8 @@ class Fuel(models.Model):
     Model representation for a `fuel` instance of a vehicle
     """
     fuel_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+    history = HistoricalRecords()
 
-    audit_log = AuditLog()
 
 
 class BasicColour(models.Model):
@@ -64,8 +64,8 @@ class BasicColour(models.Model):
     Model representation for a `basic_colour` instance of a vehicle
     """
     colour_name = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+    history = HistoricalRecords()
 
-    audit_log = AuditLog()
 
 
 class Colour(models.Model):
@@ -74,8 +74,8 @@ class Colour(models.Model):
     """
     colour_name = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
     basic_colour = models.ForeignKey(BasicColour, related_name="basic_colour")
+    history = HistoricalRecords()
 
-    audit_log = AuditLog()
 
 
 class Vehicle(models.Model):
@@ -93,3 +93,5 @@ class Vehicle(models.Model):
     colour = models.ForeignKey(Colour)
     mileage = models.IntegerField(null=False, blank=False)
     year = models.IntegerField(null=False, blank=False)
+    history = HistoricalRecords()
+
