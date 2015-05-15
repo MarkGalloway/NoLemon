@@ -1,16 +1,17 @@
 from django.contrib import admin
-from django.contrib.auth.models import Group
-from django.contrib.auth.admin import GroupAdmin
+import django.contrib.auth.models as auth_models
+import django.contrib.auth.admin as auth_admin
 
-from core.models.user_models import User
-from core.admin.user_admin import UserAdmin
 from core.admin.admin_site import NoLemonAdminSite
+from core.admin.user_admin import *
+from core.admin.registration_admin import *
 
-from registration.admin import RegistrationAdmin
-from registration.models import RegistrationProfile
+import core.models as core_models
 
 admin.site = NoLemonAdminSite()
 
-admin.site.register(User, UserAdmin)
-admin.site.register(Group, GroupAdmin)
-admin.site.register(RegistrationProfile)
+admin.site.register(core_models.user_models.User, user_admin.UserAdmin)
+admin.site.register(core_models.registration_models.RegistrationProfile, registration_admin.RegistrationAdmin)
+
+
+

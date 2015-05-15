@@ -1,5 +1,7 @@
 from django.contrib.auth.admin import UserAdmin as BaseAdmin
 
+__all__ = ['UserAdmin']
+
 class UserAdmin(BaseAdmin):
     
     # List View Attributes
