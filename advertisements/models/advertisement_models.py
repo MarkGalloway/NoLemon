@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 
 from core.models import User, Address
-# from vehicles.models import Vehicle as Article
+from vehicles.models import Vehicle as Article
 from .media_models import Image
 
 __all__ = ['Advertisement']
@@ -35,7 +35,7 @@ class Advertisement(models.Model):
     """
     A models representing an `Advertistement` instance
     """
-    # article = models.ForeignKey(Article, related_name="advertisements")
+    article = models.ForeignKey(Article, related_name="advertisements")
     seller = models.ForeignKey(User, related_name="advertisements")
     # inspection_report = models.ForeignKey(InspectionReport, related_name="ads")
     # history_report = models.ForeignKey(HistoryReport, related_name="ads")
