@@ -1,2 +1,3 @@
-from core.models.user_models import *
-from core.models.registration_models import *
+from .user_models import *
+from .registration_models import *
+from .location_models import *
