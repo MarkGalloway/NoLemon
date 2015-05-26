@@ -112,11 +112,10 @@
 <part>id</part>
 </key>
 </table>
-<table x="414" y="1233" name="Video">
+<table x="1171" y="1546" name="Video">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Vehicle" row="id" />
-</row>
+<default>NULL</default></row>
 <row name="article_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -138,7 +137,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="387" y="762" name="Vehicle">
+<table x="443" y="764" name="Vehicle">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -230,7 +229,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="97" y="1280" name="Video_Report">
+<table x="82" y="1359" name="Video_Report">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -266,11 +265,10 @@
 <part>advertisement_id</part>
 </key>
 </table>
-<table x="738" y="1231" name="Image">
+<table x="1334" y="1647" name="Image">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Vehicle" row="id" />
-</row>
+<default>NULL</default></row>
 <row name="article_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -410,20 +408,20 @@
 <row name="colour_name" null="1" autoincrement="1">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="colour_superclass" null="1" autoincrement="0">
+<row name="basic_colour" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
-<default>NULL</default><relation table="Colour_Superclass" row="colour_superclass" />
+<default>NULL</default><relation table="BasicColour" row="basic_colour" />
 </row>
 <key type="PRIMARY" name="">
 <part>colour_name</part>
 </key>
 </table>
-<table x="999" y="1091" name="Colour_Superclass">
-<row name="colour_superclass" null="1" autoincrement="1">
+<table x="1015" y="1100" name="BasicColour">
+<row name="basic_colour" null="1" autoincrement="1">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>colour_superclass</part>
+<part>basic_colour</part>
 </key>
 </table>
 <table x="849" y="1015" name="Fuel_Types">
