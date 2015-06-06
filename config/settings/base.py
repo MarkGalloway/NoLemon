@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'simple_history',
     'core',
     'payments',
-    'advertisements'
+    'advertisements',
     'vehicles'
 )
 
