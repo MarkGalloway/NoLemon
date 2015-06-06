@@ -45,6 +45,7 @@ class Advertisement(models.Model):
     date_closed = models.DateTimeField(null=True)
     address = models.ForeignKey(Address, related_name="advertisements")
     image = models.ManyToManyField(Image, related_name="advertisements", through="AdvertisementImage")
+    views = models.PositiveIntegerField(default=0)
 
     # Managers
     objects = AdvertisementManager()
