@@ -52,10 +52,10 @@ class AdvertisementTestCase(APITestCase):
         self.ad_civic = mommy.make(Advertisement, price=2000, views=5, article=self.vehicle_honda_civic)
 
         # override posted dates
-        Advertisement.objects.filter(pk=self.ad_camry.id).update(date_posted=self.ad_civic.date_posted -
-                                                                 datetime.timedelta(days=7))
-        Advertisement.objects.filter(pk=self.ad_civic.id).update(date_posted=self.ad_civic.date_posted -
-                                                                 datetime.timedelta(days=14))
+        new_date = self.ad_civic.date_posted - datetime.timedelta(days=7)
+        Advertisement.objects.filter(pk=self.ad_camry.id).update(date_posted=new_date)
+        new_date = self.ad_civic.date_posted - datetime.timedelta(days=14)
+        Advertisement.objects.filter(pk=self.ad_civic.id).update(date_posted=new_date)
 
 
 class AdvertisementModelTests(AdvertisementTestCase):
@@ -104,93 +104,155 @@ class AdvertisementViewTests(AdvertisementTestCase):
         super(AdvertisementViewTests, self).setUp()
 
     def test_list(self):
+        ads = Advertisement.objects.all()
         response = self.client.get("/advertisements/")
 
         # Assert response
         self.assertTrue(status.is_success(response.status_code))
 
         # Assert content
-        self.assertEquals(len(response.data), 3)
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
 
     def test_filter_min_price(self):
         # Assert ads >= $0
         ads = Advertisement.objects.all().filter(price__gte=0)
         response = self.client.get("/advertisements/?min_price=0")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
 
         # Assert ads >= $5000
         ads = Advertisement.objects.all().filter(price__gte=5000)
         response = self.client.get("/advertisements/?min_price=5000")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
 
         # Assert ads >= #9001
         ads = Advertisement.objects.all().filter(price__gte=9001)
         response = self.client.get("/advertisements/?min_price=9001")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
 
     def test_filter_max_price(self):
         # Assert ads <= $0
         ads = Advertisement.objects.all().filter(price__lte=0)
         response = self.client.get("/advertisements/?max_price=0")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
 
         # Assert ads <= $5000
         ads = Advertisement.objects.all().filter(price__lte=5000)
         response = self.client.get("/advertisements/?max_price=5000")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
 
         # Assert ads <= #9001
         ads = Advertisement.objects.all().filter(price__lte=9001)
         response = self.client.get("/advertisements/?max_price=9001")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
 
     def test_filter_year(self):
         ads = Advertisement.objects.all().filter(article__year__gte=2000)
         response = self.client.get("/advertisements/?year=2000")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_filter_mileage(self):
         ads = Advertisement.objects.all().filter(article__mileage__lte=100000)
         response = self.client.get("/advertisements/?mileage=100000")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_filter_car_model(self):
         ads = Advertisement.objects.all().filter(article__car_model__model_type="Corolla")
         response = self.client.get("/advertisements/?model=Corolla")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_filter_make(self):
         ads = Advertisement.objects.all().filter(article__car_model__make__make_type="Toyota")
         response = self.client.get("/advertisements/?make=Toyota")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_filter_colour(self):
         ads = Advertisement.objects.all().filter(article__colour__basic_colour__colour_name="Blue")
         response = self.client.get("/advertisements/?colour=Blue")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_filter_price_combination(self):
         # Assert ads == #5000
         ads = Advertisement.objects.all().filter(price__lte=5000).filter(price__gte=5000)
         response = self.client.get("/advertisements/?min_price=5000&max_price=5000")
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_filter_combination(self):
@@ -209,78 +271,123 @@ class AdvertisementViewTests(AdvertisementTestCase):
         query = query + "&mileage=100000"
         query = query + "&year=2000"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_ordering_default(self):
         ads = Advertisement.objects.all().order_by('-date_posted')
         query = ""
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         serializer = AdvertisementListSerializer(ads, many=True)
-        self.assertEquals(response.data, serializer.data)
+        self.assertEquals(data, serializer.data)
 
     def test_ordering_date_posted(self):
         ads = Advertisement.objects.all().order_by('date_posted')
         query = "?ordering=date_posted"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         serializer = AdvertisementListSerializer(ads, many=True)
-        self.assertEquals(response.data, serializer.data)
+        self.assertEquals(data, serializer.data)
 
     def test_ordering_price_decreasing(self):
         ads = Advertisement.objects.all().order_by('-price')
         query = "?ordering=-price"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         serializer = AdvertisementListSerializer(ads, many=True)
-        self.assertEquals(response.data, serializer.data)
+        self.assertEquals(data, serializer.data)
 
     def test_ordering_price_increasing(self):
         ads = Advertisement.objects.all().order_by('price')
         query = "?ordering=price"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         serializer = AdvertisementListSerializer(ads, many=True)
-        self.assertEquals(response.data, serializer.data)
+        self.assertEquals(data, serializer.data)
 
     def test_ordering_views_decreasing(self):
         ads = Advertisement.objects.all().order_by('-views')
         query = "?ordering=-views"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         serializer = AdvertisementListSerializer(ads, many=True)
-        self.assertEquals(response.data, serializer.data)
+        self.assertEquals(data, serializer.data)
 
     def test_ordering_views_increasing(self):
         ads = Advertisement.objects.all().order_by('views')
         query = "?ordering=views"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         serializer = AdvertisementListSerializer(ads, many=True)
-        self.assertEquals(response.data, serializer.data)
+        self.assertEquals(data, serializer.data)
 
     def test_search_make(self):
         ads = Advertisement.objects.all().filter(article__car_model__make__make_type="Toyota")
         query = "?search=toyota"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_search_model(self):
         ads = Advertisement.objects.all().filter(article__car_model__model_type="Civic")
         query = "?search=civic"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_search_make_and_model(self):
@@ -289,8 +396,13 @@ class AdvertisementViewTests(AdvertisementTestCase):
         ads = ads.filter(article__car_model__model_type="Corolla")
         query = "?search=toyota,corolla"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_search_partial_make_and_model(self):
@@ -299,8 +411,13 @@ class AdvertisementViewTests(AdvertisementTestCase):
         ads = ads.filter(article__car_model__model_type="Corolla")
         query = "?search=toy,cor"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_search_description(self):
@@ -309,8 +426,13 @@ class AdvertisementViewTests(AdvertisementTestCase):
         ads = ads.filter(article__car_model__model_type="Corolla")
         query = "?search=lemon"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
 
     def test_search_colour(self):
@@ -318,7 +440,11 @@ class AdvertisementViewTests(AdvertisementTestCase):
         ads = ads.filter(article__colour__basic_colour__colour_name="Blue")
         query = "?search=blue"
         response = self.client.get("/advertisements/" + query)
+
+        # Assert response
         self.assertTrue(status.is_success(response.status_code))
-        self.assertEquals(len(response.data), ads.count())
+
+        # Assert content
+        data = response.data['results']
+        self.assertEquals(len(data), ads.count())
         self.assertNotEquals(0, ads.count())
-        print(response.data)
