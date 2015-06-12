@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 
 __all__ = ['User']
+
+
 class User(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField('username', max_length=30, unique=True,
