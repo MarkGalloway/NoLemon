@@ -1,15 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-class Model(models.Model):
-    """
-    Model representation for a `model` instance of a vehicle
-    """
-    model_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
-
-    def __str__(self):
-        return self.model_type
-
 
 class Make(models.Model):
     """
@@ -19,6 +10,17 @@ class Make(models.Model):
 
     def __str__(self):
         return self.make_type
+
+
+class Model(models.Model):
+    """
+    Model representation for a `model` instance of a vehicle
+    """
+    make = models.ForeignKey(Make, related_name="models")
+    model_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+
+    def __str__(self):
+        return self.model_type
 
 
 class Trim(models.Model):
@@ -76,7 +78,7 @@ class Colour(models.Model):
     Model representation for a `colour` instance of a vehicle
     """
     colour_name = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
-    basic_colour = models.ForeignKey(BasicColour, related_name="basic_colour")
+    basic_colour = models.ForeignKey(BasicColour, related_name="colours")
 
     def __str__(self):
         return self.colour_name
@@ -88,13 +90,11 @@ class Vehicle(models.Model):
     """
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="owner")
     description = models.CharField(max_length=250, null=False, blank=True)
-    model = models.ForeignKey(Model)
-    make = models.ForeignKey(Make)
+    car_model = models.ForeignKey(Model)
     trim = models.ForeignKey(Trim)
     body = models.ForeignKey(Body)
     transmission = models.ForeignKey(Transmission)
     fuel_type = models.ForeignKey(Fuel)
     colour = models.ForeignKey(Colour)
-    mileage = models.IntegerField(null=False, blank=False)
-    year = models.IntegerField(null=False, blank=False)
-
+    mileage = models.PositiveIntegerField(null=False, blank=False)
+    year = models.PositiveIntegerField(null=False, blank=False)

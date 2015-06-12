@@ -44,7 +44,6 @@ AUTH_USER_MODEL = 'core.User'
 # Application definition
 
 INSTALLED_APPS = (
-    #'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -72,6 +71,11 @@ ROOT_URLCONF = 'config.urls'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
+    'PAGE_SIZE': 10
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

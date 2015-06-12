@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
             name='Colour',
             fields=[
                 ('colour_name', models.CharField(max_length=30, serialize=False, primary_key=True)),
-                ('basic_colour', models.ForeignKey(related_name='basic_colour', to='vehicles.BasicColour')),
+                ('basic_colour', models.ForeignKey(related_name='colours', to='vehicles.BasicColour')),
             ],
         ),
         migrations.CreateModel(
@@ -47,6 +47,7 @@ class Migration(migrations.Migration):
             name='Model',
             fields=[
                 ('model_type', models.CharField(max_length=30, serialize=False, primary_key=True)),
+                ('make', models.ForeignKey(related_name='models', to='vehicles.Make')),
             ],
         ),
         migrations.CreateModel(
@@ -65,14 +66,13 @@ class Migration(migrations.Migration):
             name='Vehicle',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
-                ('description', models.CharField(blank=True, max_length=250)),
-                ('mileage', models.IntegerField()),
-                ('year', models.IntegerField()),
+                ('description', models.CharField(max_length=250, blank=True)),
+                ('mileage', models.PositiveIntegerField()),
+                ('year', models.PositiveIntegerField()),
                 ('body', models.ForeignKey(to='vehicles.Body')),
+                ('car_model', models.ForeignKey(to='vehicles.Model')),
                 ('colour', models.ForeignKey(to='vehicles.Colour')),
                 ('fuel_type', models.ForeignKey(to='vehicles.Fuel')),
-                ('make', models.ForeignKey(to='vehicles.Make')),
-                ('model', models.ForeignKey(to='vehicles.Model')),
                 ('owner', models.ForeignKey(related_name='owner', to=settings.AUTH_USER_MODEL)),
                 ('transmission', models.ForeignKey(to='vehicles.Transmission')),
                 ('trim', models.ForeignKey(to='vehicles.Trim')),
