@@ -29,6 +29,7 @@ class RegistrationManager(models.Manager):
         If the key is not valid or has expired, return `False`.
         If the key is valid but the `User` is already active return `False`.
 
+
         To prevent reactivation of an account which has been deactivated by site administrators, the activation key is
         reset to the string constant `RegistrationProfile.ACTIVATED` after successful activation.
         """
@@ -127,7 +128,6 @@ class RegistrationProfile(models.Model):
     objects = RegistrationManager()
 
     class Meta:
-        app_label = 'auth'
         verbose_name = 'registration'
         verbose_name_plural = 'Site Registration'
 

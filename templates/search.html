@@ -1,35 +1,19 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block page %}
-    <!-- begin:navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-top">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{% url "home" %}"><img id="logo" src="{%  static "img/logos/nolemon.png" %}"></a>
-        </div>
+{% block navlinks %}
+            <li><a href="{% url "home" %}">Home</a></li>
+            {% if user.is_authenticated %}
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">You <b class="caret"></b></a></li>
+            {% else %}
+                <li><a href="#modal-register" class="modal-button" data-toggle="modal" data-target="#modal-register">Register</a></li>
+                <li><a href="#modal-signin" class="modal-button" data-toggle="modal" data-target="#modal-signin">Sign in</a></li>
+            {% endif %}
+            <li><a href="#" class="nav-button">Sell your Car</a></li>
+{% endblock %}
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-top">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active hidden"><a href="#header">Home</a></li>
-            <li><a href="#service" class="page-scroll">Services</a></li>
-            <li><a href="#about" class="page-scroll">How It Works</a></li>
-            <li><a href="#contact" class="page-scroll">Contact</a></li>
-            <li><a href="#modal-signin" class="signin" data-toggle="modal" data-target="#modal-signin">Sign in</a></li>
-            <li><a href="#" class="signup" data-toggle="modal" data-target="#modal-signup">Sign up</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav>
-    <!-- end:navbar -->
+
+{% block page %}
 
     <!-- begin:header -->
     <div id="header" class="heading" style="background-image: url({%  static "img/img01.jpg" %})">
@@ -149,7 +133,6 @@
               <div class="col-md-4 col-sm-4 col-xs-3">
                 <a href="search.html" class="btn btn-warning"><i class="fa fa-th"></i></a>
                 <a href="search_list.html" class="btn btn-default"><i class="fa fa-list"></i></a>
-                <span>Show <strong>6</strong> of <strong>30</strong> result.</span>
               </div>
               <div class="col-md-8 col-sm-8 col-xs-9">
                 <form class="form-inline" role="form">
@@ -202,17 +185,19 @@
 
           <!-- begin:sidebar -->
           <div class="col-md-3 col-md-pull-9 sidebar">
-            <div class="widget widget-sidebar widget-white">
-              <div class="widget-header">
-                <h3>Location</h3>
+            <div class="widget widget-sidebar widget-white panel">
+              <div class="widget-header collapse-title">
+                Location<a href="#my-location" data-toggle="collapse" class="pull-right"><i class="fa fa-angle-down"></i></a>
               </div>
-              <ul>
-                <li class="active toplevel"><a href="#">Alberta</a></li>
-                <li><a href="#">Edmonton</a></li>
-                <li><a href="#">Calgary</a></li>
-                <li><a href="#">Red Deer</a></li>
-                <li><a href="">Fort McMurray</a></li>
-              </ul>
+                <div class="panel-collapse collapse in" id="my-location">
+                  <ul class="tierlist">
+                    <li class="active toplevel"><a href="#"><i class="fa fa-map-marker"></i>Alberta</a></li>
+                    <li><a href="#">Edmonton</a></li>
+                    <li><a href="#">Calgary</a></li>
+                    <li><a href="#">Red Deer</a></li>
+                    <li><a href="">Fort McMurray</a></li>
+                  </ul>
+                    </div>
             </div>
           </div>
           <!-- end:sidebar -->
@@ -242,86 +227,17 @@
     </div>
     <!-- end:subscribe -->
 
-    <!-- begin:footer -->
-    <div id="footer">
-      <div class="container">
-        <!-- begin:copyright -->
-        <div class="row">
-          <div class="col-md-12 copyright">
-            <p>Copyright &copy; 2015 NoLemon, Inc. All Right Reserved.</p>
-            <a href="#top" class="btn btn-warning scroltop"><i class="fa fa-chevron-up"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end:footer -->
+{% endblock %}
 
-    <!-- begin:modal-signin -->
-    <div class="modal fade" id="modal-signin" tabindex="-1" role="dialog" aria-labelledby="modal-signin" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Sign in</h4>
-          </div>
-          <div class="modal-body">
-            <form role="form">
-              <div class="form-group">
-                <label for="emailAddress">Email address</label>
-                <input type="email" class="form-control input-lg" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control input-lg" placeholder="Password">
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" name="forget"> Keep me logged in
-                </label>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <p>Don't have account ? <a href="#modal-signup"  data-toggle="modal" data-target="#modal-signup">Sign up here.</a></p>
-            <input type="submit" class="btn btn-warning btn-block btn-lg" value="Sign in">
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end:modal-signin -->
-
-    <!-- begin:modal-signup -->
-    <div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="modal-signup" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Sign up</h4>
-          </div>
-          <div class="modal-body">
-            <form role="form">
-              <div class="form-group">
-                <input type="email" class="form-control input-lg" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control input-lg" placeholder="Password">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control input-lg" placeholder="Confirm Password">
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" name="agree"> Agree to our <a href="#">terms of use</a> and <a href="#">privacy policy</a>
-                </label>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <p>Already have account ? <a href="#modal-signin" data-toggle="modal" data-target="#modal-signin">Sign in here.</a></p>
-            <input type="submit" class="btn btn-warning btn-block btn-lg" value="Sign up">
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end:modal-signup -->
+{% block footerlinks %}
+  <ul class=" pull-left navbar-link footer-nav">
+      <li>
+          <a href="index.html"> Home </a>
+          <a href="about-us.html"> About us </a>
+          <a href="#"> Terms and Conditions </a>
+          <a href="#"> Privacy Policy </a>
+          <a href="contact.html"> Contact us </a>
+          <a href="faq.html"> FAQ </a>
+      </li>
+  </ul>
 {% endblock %}

@@ -36,6 +36,9 @@ def get_secret(setting, secrets=secrets):
         raise ImproperlyConfigured(error_msg)
 
 SECRET_KEY = get_secret("SECRET_KEY")
+DB_NAME = get_secret("DB_NAME")
+DB_USER = get_secret("DB_USER")
+DB_PASSWORD = get_secret("DB_PASSWORD")
 
 ALLOWED_HOSTS = []
 
@@ -45,6 +48,7 @@ AUTH_USER_MODEL = 'core.User'
 
 INSTALLED_APPS = (
     #'bootstrap_admin',
+    'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -79,9 +83,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nolemon',
-        'USER': 'nolemon',
-        'PASSWORD': 'nolemon',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -115,11 +119,13 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, '../templates'),
 )
 
-SERVER_EMAIL = ''
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+
+SERVER_EMAIL = EMAIL_HOST_USER

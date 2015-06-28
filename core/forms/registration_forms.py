@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.forms import Form, ModelForm
+from django import forms
 User = get_user_model()
 
-class PlayerRegistrationForm(ModelForm):
+class RegistrationForm(forms.ModelForm):
     """
     Form for registering a new user account.
     Validates that the requested username and email is not already in use, and
@@ -37,7 +37,7 @@ class PlayerRegistrationForm(ModelForm):
         Validate that the supplied email address is unique for the site.
         """
         email = self.cleaned_data.get("email")
-        if Player.objects.filter(email__iexact=self.cleaned_data['email']):
+        if User.objects.filter(email__iexact=self.cleaned_data['email']):
             raise forms.ValidationError(self.error_messages['duplicate_email'])
         return email.tolower()
 
@@ -49,5 +49,5 @@ class PlayerRegistrationForm(ModelForm):
         password2 = self.cleaned_data.get("password2")
         if password and password2:
             if password != password2:
-                raise forms.ValidationError("password_mismatch")
+                raise forms.ValidationError(self.error_messages['password_mismatch'])
         return password
