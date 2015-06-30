@@ -88,10 +88,10 @@ $(document).ready(function(){
 
 
     /* masonry layout */
-    var $container = $('.container-realestate');
-    $container.imagesLoaded( function(){
-        $container.masonry();
-    });
+    // var $container = $('.container-realestate');
+    // $container.imagesLoaded( function(){
+    //     $container.masonry();
+    // });
 
 
     /* modal */
@@ -139,7 +139,7 @@ $(document).ready(function(){
               center: [-7.866315,110.389574],
               zoom: 12,
               scrollwheel: false
-            }  
+            }
          },
         marker:{
             latLng: [-7.866315,110.389574],
@@ -167,7 +167,7 @@ $(document).ready(function(){
                   center: [-7.866315,110.389574],
                   zoom: 13,
                   scrollwheel: false
-                }  
+                }
              },
             marker:{
                 latLng: [-7.866315,110.389574],
