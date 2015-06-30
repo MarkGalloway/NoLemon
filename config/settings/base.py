@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'core',
     'payments',
-    'advertisements',
+    'classifieds',
     'vehicles',
 )
 

@@ -1,1 +1,0 @@
-from .advertisement_views import AdvertisementViewSet

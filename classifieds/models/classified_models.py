@@ -3,52 +3,52 @@ from datetime import datetime
 from django.db import models
 
 from core.models import User, Address
-from vehicles.models import Vehicle as Article
+from vehicles.models import Vehicle
 from .media_models import Image
 
-__all__ = ['Advertisement']
+__all__ = ['Classified']
 
 
-class AdvertisementQuerySet(models.QuerySet):
+class ClassifiedQuerySet(models.QuerySet):
     """
-    Custom QuerySet for the AdvertisementManager
+    Custom QuerySet for the ClassifiedManager
     """
     def active(self):
         """Query to return only active Ad instances"""
         return self.filter(is_active=True)
 
 
-class AdvertisementManager(models.Manager):
+class ClassifiedManager(models.Manager):
     """
-    A custom manager for the Advertisement model
+    A custom manager for the Classified model
     """
     use_for_related_fields = True
 
     def get_queryset(self):
-        return AdvertisementQuerySet(self.model, using=self._db)
+        return ClassifiedQuerySet(self.model, using=self._db)
 
     def active(self):
         return self.get_queryset().active()
 
 
-class Advertisement(models.Model):
+class Classified(models.Model):
     """
     A models representing an `Advertistement` instance
     """
-    article = models.ForeignKey(Article, related_name="advertisements")
-    seller = models.ForeignKey(User, related_name="advertisements")
+    vehicle = models.ForeignKey(Vehicle, related_name="classifieds")
+    seller = models.ForeignKey(User, related_name="classifieds")
     # inspection_report = models.ForeignKey(InspectionReport, related_name="ads")
     # history_report = models.ForeignKey(HistoryReport, related_name="ads")
-    price = models.DecimalField(max_digits=11, decimal_places=2)
+    price = models.PositiveIntegerField(null=False, blank=False)
     is_active = models.BooleanField(default=True)
     date_posted = models.DateTimeField(auto_now_add=True)
     date_closed = models.DateTimeField(null=True)
-    address = models.ForeignKey(Address, related_name="advertisements")
-    image = models.ManyToManyField(Image, related_name="advertisements", through="AdvertisementImage")
+    address = models.ForeignKey(Address, related_name="classifieds")
+    image = models.ManyToManyField(Image, related_name="classifieds", through="ClassifiedImage")
     views = models.PositiveIntegerField(default=0)
 
     # Managers
-    objects = AdvertisementManager()
+    objects = ClassifiedManager()
 
     def delete(self, *args, **kwargs):
         """
@@ -58,12 +58,12 @@ class Advertisement(models.Model):
         date_closed = datetime.now()
 
 
-class AdvertisementImage(models.Model):
+class ClassifiedImage(models.Model):
     """
     Model for representing the Many to Many relationship
-    between Advertisements and Images
+    between Classifieds and Images
     """
     image = models.ForeignKey(Image)
-    advertisement = models.ForeignKey(Advertisement)
+    classified = models.ForeignKey(Classified)
     order = models.IntegerField()
     date_added = models.DateTimeField(auto_now_add=True)
