@@ -1,4 +1,5 @@
-var url = '/classifieds/?'
+var base_url = '/classifieds/?';
+var url = base_url;
 
 
 /*
@@ -25,13 +26,17 @@ function loadAjax() {
         url: url,
         success: function(data) {
 
-            // update url for next page
-            url = $(data).filter('#next-link').attr('href');
+            // Update url for next page
+            next_url = $(data).filter('#next-link').attr('href');
 
-            // append data(html) to list of ads
-            $("#ad-list").append(data);
+            // Strip the next-link from the html
+            ads = $(data).not('#next-link')
 
-            if(url) {
+            // append ads(html) to list of ads
+            $("#ad-list").append(ads);
+
+            if(next_url) {
+                url = next_url
                 // Bind scroll listener is there are more results
                 $(window).scroll(scrollListener);
             }
@@ -52,7 +57,7 @@ function loadData() {
     $("#ad-list").empty()
 
     // Reset URL
-    url = '/classifieds/?';
+    url = base_url;
 
     // TODO: get values from search form and append to URL
 
@@ -75,4 +80,3 @@ $(document)
   .ajaxStop(function () {
     $loading.hide();
   });
-
