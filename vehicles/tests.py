@@ -55,14 +55,8 @@ class VehicleSerializerTests(VehicleTestCase):
 
         data = VehicleSerializer(vehicle).data
 
-        self.assertEquals(len(data), 10)
-        self.assertEquals(data.get('description', None), vehicle.description)
         self.assertEquals(data.get('mileage', None), vehicle.mileage)
         self.assertEquals(data.get('year', None), vehicle.year)
         self.assertEquals(data.get('model', None), vehicle.car_model.model_type)
         self.assertEquals(data.get('make', None), vehicle.car_model.make.make_type)
-        self.assertEquals(data.get('trim', None), vehicle.trim.trim_type)
-        self.assertEquals(data.get('fuel_type', None), vehicle.fuel_type.fuel_type)
-        self.assertEquals(data.get('transmission', None), vehicle.transmission.transmission_type)
-        self.assertEquals(data.get('body', None), vehicle.body.body_type)
         self.assertIsNotNone(data.get('colour', None))
