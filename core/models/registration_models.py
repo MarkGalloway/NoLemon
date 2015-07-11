@@ -5,13 +5,13 @@ import re
 
 import django.utils.timezone as timezone
 from django.conf import settings
-from django.db import models
-from django.db import transaction
+from django.db import models, transaction
 from django.template.loader import render_to_string
 
-from core.models import User
+from ..models import User
 
 __all__ = ['RegistrationManager', 'RegistrationProfile']
+
 
 class RegistrationManager(models.Manager):
     """
@@ -35,9 +35,9 @@ class RegistrationManager(models.Manager):
         """
 
         errors = {
-            'invalid-activation-key' : 'Activation key is invalid.',
-            'no-registration' : 'No pending registration found. This account may already be active.',
-            'key-expired' : 'Activation key has expired please re-register.'
+            'invalid-activation-key': 'Activation key is invalid.',
+            'no-registration': 'No pending registration found. This account may already be active.',
+            'key-expired': 'Activation key has expired please re-register.'
         }
 
         if not re.compile('^[a-f0-9]{40}$').search(activation_key):
@@ -66,7 +66,7 @@ class RegistrationManager(models.Manager):
         and email its activation key to the `User`, returning the new `User`.
         By default, an activation email will be sent to the new user.
         """
-        
+
         new_user = user_models.User.objects.create_user(username, email, password, **extra_fields)
         new_user.is_active = False
         new_user.save()
@@ -105,7 +105,7 @@ class RegistrationManager(models.Manager):
         If you have a troublesome `User` and wish to disable their account while keeping it in the database,
         simply delete the associated `RegistrationProfile`.
         """
-        
+
         for profile in self.all():
             try:
                 if profile.activation_key_expired():
