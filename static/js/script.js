@@ -12,15 +12,6 @@ $(document).ready(function(){
         duration: 5000
     });
 
-    /* navbar */
-	$(window).scroll(function(){
-		if($(window).scrollTop() > header_height){
-            //$('.navbar').css('border-bottom-color', '#f6bb42');
-		}else{
-            //$('.navbar').css('border-bottom-color', '#fff');
-		}
-	});
-
     /* carousel testimony */
     $('#testislider').carousel({
         interval: 6000
@@ -99,16 +90,21 @@ $(document).ready(function(){
         var curModal = this;
         $('.modal').each(function(){
             if(this != curModal){
+                $(this).toggleClass('fade');
                 $(this).modal('hide');
+                $(this).toggleClass('fade');
             }
         });
-    });
 
-    /* action bar
-    $( 'ul.nav li a.page-scroll' ).on( 'click', function() {
-            $( this ).parent().parent().find( 'li.active' ).removeClass( 'active' );
-            $( this ).parent().addClass( 'active' );
-    });*/
+        $(this).modal('show');
+        /*
+        console.log('test');
+        $('.modal').each(function(){
+            if(this != curModal){
+                $(this).modal('hide');
+            }
+        });*/
+    });
 
 
     /* tooltip */
@@ -155,8 +151,12 @@ $(document).ready(function(){
 
     /* carousel single */
     $('#slider-property').carousel({
-        interval: 6500
+        interval: false
     })
+
+    $('.dropdown').hover(function(){
+      $('.dropdown-toggle', this).trigger('click');
+    });
 
 
     /* map property */

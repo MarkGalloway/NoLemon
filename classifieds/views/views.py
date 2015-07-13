@@ -28,8 +28,8 @@ class ClassifiedViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
             ?search=toyota
     """
     queryset = Classified.objects.all().select_related('vehicle', 'vehicle__car_model', 'vehicle__car_model__make',
-                                                          'vehicle__colour', 'address', 'address__city', 'address__city__region',
-                                                          'seller').prefetch_related('image')
+                                                       'vehicle__colour', 'address', 'address__city', 'address__city__region',
+                                                       'seller').prefetch_related('image')
     renderer_classes = (renderers.TemplateHTMLRenderer, renderers.JSONRenderer)
     template_name = 'ad_fragment.html'
     serializer_class = ClassifiedListSerializer

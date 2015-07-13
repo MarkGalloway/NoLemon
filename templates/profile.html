@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block navlinks %}
+            <li class="active hidden"><a href="#header">Home</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Search</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboard <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="blog.html">My Ads</a></li>
+                <li><a href="blog_single.html">Messages</a></li>
+                <li><a href="about.html">Favorites</a></li>
+                <li><a href="contact.html">WatchList</a></li>
+            </ul></li>
+            <li><a href="#" class="nav-button">Sell your Car</a></li>
+{% endblock %}
+
+{% block page %}
+<div id="content">
+
+<div class="container">
+  <div class="row">
+
+    <!--begin:sidebar -->
+    <div class="col-md-3 sidebar">
+        <div class="widget widget-sidebar widget-white panel">
+            <!-- begin:my-ads  -->
+            <div class="collapse-title widget-header">My Ads<a href="#MyAds" data-toggle="collapse" class="pull-right"><i class="fa fa-angle-down"></i></a></div>
+              <div class="panel-collapse collapse in" id="MyAds">
+                <ul class="menulist">
+                  <li><a href="#"><i class="fa fa-folder"></i>My Ads</a></li>
+                  <li><a href="#"><i class="fa fa-envelope"></i>Messages</a></li>
+                  <li><a href="#"><i class="fa fa-heart"></i>Favourites</li>
+                  <li><a href="#"><i class="fa fa-binoculars"></i>Watch List<span class="badge">3</span> </a></li>
+                </ul>
+              </div>
+            <!-- end:my-ads  -->
+            <!-- begin:my-account  -->
+              <div class="collapse-title widget-header">My Account<a href="#my-account" data-toggle="collapse" class="pull-right"><i class="fa fa-angle-down"></i></a></div>
+              <div class="panel-collapse collapse in" id="my-account">
+                <ul class="menulist">
+                    <li class="active"><a href="#"><i class="fa fa-user"></i> Profile </a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> Settings </a></li>
+                </ul>
+              </div>
+            <!-- end:my-account  -->
+        </div>
+        <!-- end:widget  -->
+    </div>
+    <!-- end:sidebar-->
+
+    <!--  start: main column -->
+      <div class="col-md-9">
+          <!-- begin: title widget -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="panel user-banner">
+                  <div class="row">
+
+                    <div class="col-md-7 col-sm-6 col-xs-12">
+                      <h3 class="useradmin "><img class="user-img" src="{% static "img/testimg.jpg" %}" alt="user"><a href="#">Jane Doe</a></h3>
+                    </div>
+
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                      <div class="header-data text-center-xs">
+
+                        <!-- revenue data -->
+                        <div class="hdata">
+                          <div class="mcol-left">
+                            <!-- Icon with green background -->
+                            <i class="fa fa-car ln-shadow blue"></i>
+                          </div>
+                          <div class="mcol-right">
+                            <!-- Number of visitors -->
+                            <p><a href="#">0</a><em>Ads</em></p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+
+                        <!-- revenue data -->
+                        <div class="hdata">
+                          <div class="mcol-left">
+                            <!-- Icon with blue background -->
+                            <i class="fa fa-heart ln-shadow red"></i>
+                          </div>
+                          <div class="mcol-right">
+                            <!-- Number of visitors -->
+                            <p><a href="#">18</a> <em>Favorites </em></p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  </div>
+              </div>
+            </div>
+          <!-- end: title widget -->
+
+          <!-- end: title widget -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"> <a href="#collapseB1"  data-toggle="collapse"> Contact Information </a> </h4>
+                </div>
+                <div class="panel-collapse collapse in" id="collapseB1">
+                  <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                      <div class="form-group">
+                        <label  class="col-sm-3 control-label">First Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control"  placeholder="Jane">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label  class="col-sm-3 control-label">Last name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" placeholder="Doe">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label  class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                          <input type="email" class="form-control"  placeholder="jhon.deo@example.com">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label  class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control"  placeholder="..">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="Phone" class="col-sm-3 control-label">Phone</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="Phone" placeholder="880 124 9820">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label  class="col-sm-3 control-label">Postcode</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control"  placeholder="1217">
+                        </div>
+                      </div>
+
+                      <div class="form-group hide"> <!-- remove it if dont need this part -->
+                        <label  class="col-sm-3 control-label">Facebook account map</label>
+                        <div class="col-sm-9">
+                          <div class="form-control"> <a class="link" href="fb.com">Jane.doe</a> <a class=""> <i class="fa fa-minus-circle"></i></a> </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9"> </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9 text-right">
+                          <button type="submit" class="btn btn-warning">Update</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"> <a href="#collapseB2"  data-toggle="collapse"> Account </a> </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseB2">
+                  <div class="panel-body">
+
+                    <form class="form-horizontal" role="form">
+                      <div class="form-group">
+                        <label  class="col-sm-3 control-label">New Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control"  placeholder="">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label  class="col-sm-3 control-label">Confirm Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control"  placeholder="">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9 text-right">
+                          <button type="submit" class="btn btn-warning">Update</button>
+                        </div>
+                      </div>
+                    </form>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"> <a href="#collapseB3"  data-toggle="collapse"> Preferences </a> </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseB3">
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox">
+                            I want to receive emails for my notifications. </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <!--/.row-box End-->
+
+      </div>
+    <!--  end: main column -->
+
+
+  </div>
+
+  </div>
+  <!--/ end:row-->
+
+</div>
+<!--/ end:container-->
+
+</div>
+<!--/ end:content-->
+{% endblock %}
+
+{% block footerlinks %}
+  <a href="#"> About </a>
+  <a href="#"> Contact Us </a>
+  <a href="#"> FAQ </a>
+{% endblock %}
