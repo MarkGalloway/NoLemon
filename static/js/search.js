@@ -1,11 +1,10 @@
 
-(function() {
+$(function() {
 
 var adsList = {
     container: $("#ad-list"),
     loading: $('#loading-indicator').hide(),
-    base_url: '/classifieds/?',
-    url: "",
+    url: '/search/',
 
     config: {
         effect: 'fadeIn',
@@ -24,13 +23,14 @@ var adsList = {
                 adsList.loading.hide();
             });
 
+        // unbind possible previous listener
+        $(window).unbind('scroll');
+
         // Clear current results
-        adsList.container.empty()
+        adsList.container.empty();
 
-        // Reset URL
-        adsList.url = adsList.base_url;
-
-        // TODO: get values from search form and append to URL
+        // Register browser URL for ajax
+        adsList.url = $(location).attr('href');
 
         adsList._load();
     },
@@ -84,7 +84,30 @@ var adsList = {
 
 adsList.init();
 
-// Register _loadData on search button click
-$("#search-button").on('click', adsList.init);
 
-})();
+$("#search-form").on("submit", function(event) {
+    // Prevent form submission
+    event.preventDefault();
+
+    var querystring = $("#search-form :input")
+        .filter(function(index, element) {
+            return $(element).val() != "";
+        })
+        .serialize();
+
+    // Detect browser version
+    var div = document.createElement("div");
+    div.innerHTML = "<!--[if lt IE 9]><i></i><![endif]-->";
+    var isIeLessThan9 = (div.getElementsByTagName("i").length == 1);
+
+    if(isIeLessThan9) {
+        window.location.search = querystring;
+    }
+    else {
+        window.history.replaceState({}, document.title,'?' + querystring);
+    }
+
+    adsList.init();
+});
+
+});
