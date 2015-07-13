@@ -1,0 +1,37 @@
+{% load humanize %}
+
+{% for ad in results %}
+
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="property-container">
+        <div class="property-image">
+            <img src="http://images.thecarconnection.com/med/toyota_100229755_m.jpg" alt="random dummy car">
+            <div class="property-price">
+                <span>${{ ad.price|intcomma }}</span>
+            </div>
+            <div class="property-status">
+                <span>Sedan</span>
+            </div>
+            <div class="property-type">
+                <span>{{ ad.vehicle.year }}</span>
+            </div>
+        </div>
+        <div class="property-features">
+            <span>{{ ad.vehicle.colour }}</span>
+            <span>{{ ad.vehicle.mileage|intcomma }}<sup>km<sup></span>
+        </div>
+        <div class="property-content">
+            <h3>
+                <a href="#">{{ ad.vehicle.make }} {{ ad.vehicle.model }}</a>
+                <small>{{ ad.city }}, {{ ad.region }}</small>
+                <small>Posted {{ ad.date_posted }} ago</small>
+            </h3>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% if next %}
+<a href="{{ next }}" id="next-link"></a>
+{% endif %}

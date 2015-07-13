@@ -1,6 +1,6 @@
 from django.db import models
 
-__all__ = ['Address']
+__all__ = ['Address', 'City', 'Region', 'Country']
 
 
 class Country(models.Model):

@@ -2,7 +2,7 @@
 	========================================
 	TABLE OF CONTENT
 	========================================
-	
+
 	[1. GLOBAL STYLE]
 	[2. NAVBAR]
 	[2.1 BREADCRUMBS]
@@ -24,7 +24,7 @@
 */
 
 
-/* 
+/*
 	==================
 	[1. GLOBAL STYLE]
 	==================
@@ -56,31 +56,32 @@ body{
 }
 
 
-::-moz-selection { 
-	color: #fff; 
-	text-shadow: none; 
-	background: #3498db; 
+::-moz-selection {
+	color: #fff;
+	text-shadow: none;
+	background: #3498db;
+
 }
 
-::-webkit-selection { 
-	color: #fff; 
-	text-shadow: none; 
-	background: #3498db; 
+::-webkit-selection {
+	color: #fff;
+	text-shadow: none;
+	background: #3498db;
 }
 
-::selection { 
-	color: #fff; 
-	text-shadow: none; 
-	background: #3498db; 
+::selection {
+	color: #fff;
+	text-shadow: none;
+	background: #3498db;
 }
 
 ::-webkit-scrollbar {
 	width: 10px;
-} 
+}
 
 ::-webkit-scrollbar-track {
 	background-color: #333;
-} 
+}
 
 ::-webkit-scrollbar-thumb {
 	background-color: #666;
@@ -88,11 +89,11 @@ body{
 	   -moz-border-radius: 2px;
 	     -o-border-radius: 2px;
 			border-radius: 2px;
-} 
+}
 
 ::-webkit-scrollbar-button {
 	display: none;
-} 
+}
 
 ::-webkit-scrollbar-corner {
 	background-color: #000000;
@@ -317,7 +318,7 @@ input[type="color"]:focus,
     text-align: center;
   }
 
-/* 
+/*
 	==================
 	[2. NAVBAR]
 	==================
@@ -520,7 +521,7 @@ input[type="color"]:focus,
     color: #999;
 }
 
-/* 
+/*
 	==================
 	[3. HEADER]
 	==================
@@ -633,7 +634,7 @@ input[type="color"]:focus,
 	text-transform: uppercase;
 }
 
-/* 
+/*
 	==================
 	[4.1 SERVICE]
 	==================
@@ -1037,7 +1038,7 @@ input[type="color"]:focus,
 }
 
 
-/* 
+/*
 	==================
 	[5. CONTENT]
 	==================
@@ -1123,12 +1124,6 @@ input[type="color"]:focus,
 	line-height: 30px;
 }
 
-.property-container{
-	margin-bottom: 30px;
-	background: #fff;
-	border: 1px solid #eee;
-}
-
 .property-image{
 	position: relative;
 	overflow: hidden;
@@ -1137,8 +1132,22 @@ input[type="color"]:focus,
 .property-image img{
 	max-width: 100%;
 	width: 100%;
-	height: auto;
+    height: auto;
 }
+
+.property-type{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: auto;
+    max-width: 70%;
+    padding: 5px 10px;
+    background: #1b1d2a;
+    font-weight: 500;
+    color: #fff;
+}
+
 
 .property-status{
 	position: absolute;
@@ -1149,7 +1158,7 @@ input[type="color"]:focus,
 	max-width: 70%;
 	padding: 5px 10px;
 	background: #1b1d2a;
-	font-weight: 400;
+	font-weight: 500;
 	color: #fff;
 }
 
@@ -1165,7 +1174,7 @@ input[type="color"]:focus,
 	color: #fff;
 	text-align: center;
 	font-size: 18px;
-	line-height: 22px;
+	line-height: 20px;
 	font-weight: 600;
 }
 
@@ -1186,11 +1195,19 @@ input[type="color"]:focus,
 	padding: 5px 10px;
 	background: #F6BE00;
 	color: #fff;
+    text-align: center;
 }
 
 .property-features span{
 	padding: 2px 5px;
-	font-size: 13px;
+	/*font-size: 14px;*/
+    font-weight: 600;
+}
+
+.property-container{
+    margin-bottom: 30px;
+    background: #fff;
+    border: 1px solid #eee;
 }
 
 .property-content{
@@ -1204,6 +1221,7 @@ input[type="color"]:focus,
 	font-size: 20px;
 	line-height: 24px;
 	font-weight: 600;
+    word-wrap: break-word;
 }
 
 .property-content h3 small,
@@ -1282,7 +1300,7 @@ input[type="color"]:focus,
 }
 
 
-/* 
+/*
 	==================
 	[5.1 ARTICLE]
 	==================
@@ -1296,18 +1314,18 @@ input[type="color"]:focus,
 }
 
 /* pagination */
-.pagination > li > a, 
+.pagination > li > a,
 .pagination > li > span {
 	color: #F6BE00;
 	background-color: #fff;
 	border: 1px solid #ddd;
 }
 
-.pagination > .active > a, 
-.pagination > .active > span, 
-.pagination > .active > a:hover, 
-.pagination > .active > span:hover, 
-.pagination > .active > a:focus, 
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
 .pagination > .active > span:focus {
 	z-index: 2;
 	color: #fff;
@@ -1417,7 +1435,7 @@ input[type="color"]:focus,
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left: 15%;
-	padding-right: 15%; 
+	padding-right: 15%;
 }
 
 .blog-paged > .pager li > a:hover,
@@ -1853,7 +1871,7 @@ td.ads-details-td {
 
 
 
-/* 
+/*
 	==================
 	[5.3 SIDEBAR]
 	==================
@@ -2101,7 +2119,7 @@ td.ads-details-td {
 }
 
 
-/* 
+/*
 	==================
 	[6. TESTIMONY]
 	==================
@@ -2150,7 +2168,7 @@ td.ads-details-td {
     opacity: 1;
 }
 
-#testislider.carousel .active.left, 
+#testislider.carousel .active.left,
 #testislider.carousel .active.right {
 	z-index: 2;
 	opacity: 0;
@@ -2259,7 +2277,7 @@ td.ads-details-td {
 }
 
 
-/* 
+/*
 	==================
 	[7. NEWS]
 	==================
@@ -2409,14 +2427,14 @@ td.ads-details-td {
 			border-radius: 0;
 }
 
-#content .post-meta, 
+#content .post-meta,
 .post-single .post-meta span {
 	font-size: 13px;
 	line-height: 16px;
 	color: #888;
 }
 
-#content .post-meta, 
+#content .post-meta,
 .post-single .post-meta {
 	display: block;
 	padding-top: 20px;
@@ -2575,7 +2593,7 @@ td.ads-details-td {
 }
 
 
-/* 
+/*
 	==================
 	[8. SUBSCRIBE]
 	==================
@@ -2608,7 +2626,7 @@ td.ads-details-td {
 }
 
 
-/* 
+/*
 	==================
 	[9. PARTNER]
 	==================
@@ -2732,6 +2750,7 @@ td.ads-details-td {
     background: #F6BE00;
     color: #fff;
     opacity: 1;
+
     -webkit-box-shadow: 0 0 0 1px #F6BE00;
        -moz-box-shadow: 0 0 0 1px #F6BE00;
     	-ms-box-shadow: 0 0 0 1px #F6BE00;
@@ -2774,7 +2793,7 @@ td.ads-details-td {
 }
 
 
-/* 
+/*
 	==================
 	[11. FOOTER]
 	==================
