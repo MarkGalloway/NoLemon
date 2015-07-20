@@ -1,0 +1,57 @@
+{% extends "inspection/../materialize_base.html" %}
+{% load sass_tags %}
+{% load static %}
+
+{%  block css %}
+    <link href="{% sass_src "sass/inspection.scss" %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row section">
+        <div class="col s12">
+            <div class="card-panel">
+
+                <div class="row">
+                    <div class="col s12">
+                        <table class="centered bordered">
+                            <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">Customer</th>
+                                <th data-field="price">Date</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>#EASA</td>
+                                <td>Steve Irwin</td>
+                                <td>Sept. 12 2014</td>
+                            </tr>
+                            <tr>
+                                <td>#EASA</td>
+                                <td>Steve Irwin</td>
+                                <td>Sept. 12 2014</td>
+                            </tr>
+                            <tr>
+                                <td>#EASA</td>
+                                <td>Steve Irwin</td>
+                                <td>Sept. 12 2014</td>
+                            </tr>
+                            </tbody>
+                        </table> <!--END: table-->
+                    </div>
+                </div>
+            </div> <!--END: panel-->
+
+        </div> <!--END: col -->
+    </div> <!--END: row -->
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 64px;">
+        <a class="btn-floating btn-large waves-effect waves-light grey darken-4"><i class="material-icons">add</i></a>
+    </div>
+
+
+{% endblock %}

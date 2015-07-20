@@ -1,0 +1,54 @@
+{% extends "inspection/../materialize_base.html" %}
+{% load sass_tags %}
+{% load static %}
+
+{%  block css %}
+    <link href="{% sass_src "sass/inspection.scss" %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block nav %}
+{% endblock %}
+
+{% block content %}
+    <div class="row offset-top">
+        <div class="col s12 m10 offset-m1 l8 offset-l2">
+
+
+            <div class="card-panel white">
+
+                <div class="card-header grey darken-4">
+                    <img class="logo" src="{%  static "img/logos/nolemon.png" %}"/>
+                </div>
+
+                <form>
+                    <div class="section">
+
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                <i class="prefix-inverted material-icons">account_box</i>
+                                <input class="no-move" id="username" placeholder="Username" type="text">
+                            </div>
+                        </div> <!--END: username -->
+
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                <i class="prefix-inverted material-icons">vpn_key</i>
+                                <input class="no-move" id="password" placeholder="Password" type="password">
+                            </div>
+                        </div> <!--END: username -->
+
+
+                        <div class="row">
+                            <div class="col s10 offset-s1 right-align">
+                                <a class="waves-effect waves-light btn"><i class="material-icons right">arrow_forward</i>Sign In</a>
+                            </div>
+                        </div>
+                    </div> <!--END: submit -->
+
+                </form> <!--END: form-->
+            </div> <!--END: card-panel-->
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -25,8 +25,7 @@ class SearchView(TemplateView):
 
 
 class DetailView(TemplateView):
-    template_name = 'search-detail.html'
-
+    template_name = 'search_detail.html'
 
 class ProfileView(TemplateView):
     template_name = 'profile.html'

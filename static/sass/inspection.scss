@@ -1,0 +1,166 @@
+@import "../materialize/sass/components/color";
+
+/*** Variables ***/
+$background-image: url(../img/mechanic-bg.jpg);
+$form-padding-top: 20px;
+
+/*** Overrides ***/
+$label-font-size: 1.2rem;
+$input-font-size: 1.2rem;
+$primary-color: color("grey", "darken-4");
+$primary-color-light: lighten($primary-color, 15%) ;
+$primary-color-dark: darken($primary-color, 15%) ;
+$secondary-color: color("amber", "darken-2");
+$success-color: color("green", "base");
+$error-color: color("red", "base");
+$link-color: color("light-blue", "darken-1");
+$input-border-color: color("grey", "darken-1");
+$button-font-size-shared: 1.5rem;
+$button-height: 40px;
+$button-line-height: 40px;
+$button-large-icon-font-size: 2rem;
+$navbar-font-size: 1.2rem;
+$datepicker-weekday-bg: lighten($primary-color, 20%);
+$datepicker-date-bg: $primary-color;
+$datepicker-accept-links: $primary-color;
+$switch-bg-color: $success-color;
+$switch-checked-lever-bg: desaturate(lighten($success-color, 15%), 15%);
+$switch-unchecked-bg: $error-color;
+$switch-unchecked-lever-bg: desaturate(lighten($error-color, 15%), 15%);
+$dropdown-hover-bg-color: #efefef;
+
+@import "../materialize/sass/materialize";
+
+html { @extend html;
+  min-height: 100%;
+}
+body {
+  @extend body;
+  background-image: $background-image;
+  background-size: cover;
+  font-size: 18px;
+}
+
+.logo {
+  height: 50px;
+  margin-top: 5px;
+
+}
+
+.offset-top {
+  margin-top: 10%;
+}
+
+form {
+  padding-top: $form-padding-top;
+}
+
+#nav-mobile > li > form {
+  padding-top: 0;
+}
+
+.card-header {
+  padding: 10px;
+  margin: (-$card-padding) (-$card-padding) 0 (-$card-padding);
+  border-radius: 2px;
+  background-color: $card-bg-color;
+}
+
+input.no-move {
+    color: $input-border-color;
+}
+
+.icon-text {
+  display: inline-block;
+  position: relative;
+  top: -5px;
+  margin-left: 5px;
+}
+
+.switch {
+  & .no {
+    margin-right: 15px;
+
+    ~ .lever {
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+  }
+
+  & .yes {
+    margin-left: 15px;
+  }
+}
+
+
+
+form {
+  & .divider {
+    margin-bottom: 1rem;
+  }
+
+  & .section {
+    padding-bottom: 0;
+  }
+
+  & .section .section-header {
+    padding-bottom: 1.5rem;
+  }
+
+  .input-field {
+
+    .prefix-inverted {
+      color: #fff;
+      padding-bottom: 8px;
+      padding-top: 9px;
+      padding-left: 8px;
+      background-color: $input-border-color;
+      position: absolute;
+      width: 3rem;
+      font-size: 2rem;
+      @include transition(background-color .4s);
+
+      &.active {
+        background-color: $input-focus-color;
+      }
+    }
+
+    .prefix-inverted ~ input,
+    .prefix-inverted ~ textarea {
+      @include transition(color .4s);
+      margin-left: 3rem;
+      padding-left: 1rem;
+      width: 92%;
+      width: calc(100% - 4rem);
+      border: 1px solid $input-border-color;
+
+      // Disabled input style
+      &:disabled, &[readonly="readonly"] {
+        border: 1px dotted $input-disabled-color;
+      }
+
+      // Focused input style
+      &:focus:not([readonly]) {
+        border: 1px solid $input-focus-color;
+        box-shadow: none;
+      }
+
+      // Valid Input Style
+      &.valid,
+      &:focus.valid {
+        border: 1px solid $input-success-color;
+        box-shadow: 0 1px 0 0 $input-success-color;
+      }
+    }
+  }
+
+  select {
+    border-bottom: 1px solid $input-border-color;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    font-size: 1.1rem;
+    padding: 0;
+    background-color: #fff;
+  }
+}

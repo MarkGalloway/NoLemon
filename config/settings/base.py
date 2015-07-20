@@ -39,6 +39,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 DB_NAME = get_secret("DB_NAME")
 DB_USER = get_secret("DB_USER")
 DB_PASSWORD = get_secret("DB_PASSWORD")
+STATIC_ROOT = get_secret("STATIC_ROOT")
 
 ALLOWED_HOSTS = []
 
@@ -48,6 +49,7 @@ AUTH_USER_MODEL = 'core.User'
 
 INSTALLED_APPS = (
     'bootstrap3',
+    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -57,6 +59,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'rest_framework',
+    'compressor',
+    'sass_processor',
     'core',
     'payments',
     'classifieds',
@@ -71,10 +75,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 )
 
 ROOT_URLCONF = 'config.urls'
-
+SITE_ID = 1
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Django Rest Framework settings
@@ -121,11 +126,22 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '../static'),
 )
 
+COMPRESS_ENABLED = True
+
+
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, '../templates'),
 )
 
-
+STATICFILES_FINDERS = (
+    'sass_processor.finders.CssFinder',
+    'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.zoho.com'
@@ -135,3 +151,4 @@ EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
 
 SERVER_EMAIL = EMAIL_HOST_USER
+

@@ -6,7 +6,7 @@ class UserAdmin(BaseAdmin):
 
     # List View Attributes
     list_filter = []
-    search_fields = []
+    search_fields = ['username']
     exclude = []
     inlines = []
 

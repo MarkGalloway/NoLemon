@@ -1,0 +1,174 @@
+{% extends "inspection/../materialize_base.html" %}
+{% load sass_tags %}
+{% load static %}
+
+{%  block css %}
+    <link href="{% sass_src "sass/inspection.scss" %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <div class="spinner"></div>
+    <div class="row section">
+        <div class="col s12">
+
+            <div class="card-panel">
+
+                <div class="card-header center">
+                    <div class="section"></div>
+                    <h5>MULTI-POINT VEHICLE INSPECTION</h5>
+                </div>
+
+                <div class="section row">
+                    <form class="col s10 offset-s1
+                    ">
+                        <!-------------------------------------------------------------------------------------------->
+                        <div class="divider"></div>
+                        <div class="section">
+                            <!--START: row -->
+                            <div class="row">
+                              {% include "inspection/inspection_input.html" with label="Inspection ID" id="id" type="text"  col="6" %}
+                              {% include "inspection/inspection_input.html" with label="Date" id="date" type="date" class="datepicker" col="6" %}
+                            </div>
+                            <!--END: row -->
+                        </div>
+                        <!-------------------------------------------------------------------------------------------->
+                        <div class="divider"></div>
+                        <div class="section">
+                            <div class="section-header valign-wrapper">
+                                <div class="btn-floating center"><i class="material-icons">directions_car</i></div>
+                                <div class="icon-text valign" style="margin-top:10px; margin-left: 10px;">VEHICLE DETAILS</div>
+                            </div>
+                            <!--START: row -->
+                            <div class="row">
+                              {% include "inspection/inspection_select.html" with label="Make" col="4" o1="Toyota" o2="Ford" o3="BMW" %}
+                              {% include "inspection/inspection_select.html" with label="Model" col="4" o1="Corolla" o2="Civic" o3="Camry" %}
+                              {% include "inspection/inspection_select.html" with label="Body" col="4" o1="Truck" o2="Hatchback" o3="Sedan" %}
+                            </div>
+                            <!--END: row -->
+
+                           <!--START: row -->
+                            <div class="row">
+                              {% include "inspection/inspection_select.html" with label="Fuel Type" col="4" o1="Gasoline" o2="Diesel" o3="Hybrid" %}
+                              {% include "inspection/inspection_select.html" with label="Transmission" col="4" o1="Automatic" o2="Manual" o3="Dual Clutch"%}
+                              {% include "inspection/inspection_select.html" with label="Engine" col="4" o1="3.7 V-6" o2="3.2 V-8" o3="4.7 V-8" %}
+                            </div>
+                            <!--END: row -->
+
+                            <!--START: row -->
+                            <div class="row">
+                                {% include "inspection/inspection_input.html" with label="Year" id="year" type="number"  col="4" %}
+                                {% include "inspection/inspection_input.html" with label="Kilometers" id="kilo" type="number" col="4" %}
+                                {% include "inspection/inspection_select.html" with label="Color" col="4" o1="red" o2="white" o3="blue" %}
+                            </div>
+                            <!--END: row -->
+                        </div>
+                        <!-------------------------------------------------------------------------------------------->
+                        <div class="divider"></div>
+                        <div class="section">
+                            {% include "inspection/inspection_section_title.html" with title="Exterior" icon="1" %}
+                            {% include "inspection/inspection_toggle.html" with label="Exterior Dents or Dings" %}
+                            {% include "inspection/inspection_toggle.html" with label="Mirrors" %}
+                            {% include "inspection/inspection_toggle.html" with label="Frame and Chassis" %}
+                            {% include "inspection/inspection_toggle.html" with label="Wheel Rims" %}
+                            {% include "inspection/inspection_toggle.html" with label="Windsheild and Wipers" %}
+                        </div>
+                        <!-------------------------------------------------------------------------------------------->
+                        <div class="divider"></div>
+                        <div class="section">
+                            {% include "inspection/inspection_section_title.html" with title="Interior" icon="2" %}
+                            {% include "inspection/inspection_toggle.html" with label="Upholstery" %}
+                            {% include "inspection/inspection_toggle.html" with label="Air Filters" %}
+                            {% include "inspection/inspection_toggle.html" with label="Power Seats" %}
+                            {% include "inspection/inspection_toggle.html" with label="Windows" %}
+                            {% include "inspection/inspection_toggle.html" with label="Stereo and Speakers" %}
+                        </div>
+                        <!-------------------------------------------------------------------------------------------->
+                        <div class="divider"></div>
+                        <div class="section">
+                            {% include "inspection/inspection_section_title.html" with title="Tires" icon="3" %}
+                            {% include "inspection/inspection_toggle.html" with label="Tire Pressure" %}
+                            {% include "inspection/inspection_toggle.html" with label="Tire Tread" %}
+                            {% include "inspection/inspection_toggle.html" with label="Tire Rotation" %}
+                        </div>
+                        <!-------------------------------------------------------------------------------------------->
+                        <div class="divider"></div>
+                        <div class="section">
+                            {% include "inspection/inspection_section_title.html" with title="Breaks" icon="4" %}
+                            {% include "inspection/inspection_toggle.html" with label="Break Hoses and Lines" %}
+                            {% include "inspection/inspection_toggle.html" with label="Break Rotors" %}
+                            {% include "inspection/inspection_toggle.html" with label="Break Fluid" %}
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            {% include "inspection/inspection_section_title.html" with title="Exhaust" icon="5" %}
+                            {% include "inspection/inspection_toggle.html" with label="Air Induction System" %}
+                            {% include "inspection/inspection_toggle.html" with label="Exhaust System" %}
+                            {% include "inspection/inspection_toggle.html" with label="Catalytic Converter" %}
+                        </div>
+                        <!-------------------------------------------------------------------------------------------->
+                        <div class="divider"></div>
+                        <div class="section">
+                            {% include "inspection/inspection_section_title.html" with title="Engine" icon="6" %}
+                            {% include "inspection/inspection_toggle.html" with label="Engine Oil" %}
+                            {% include "inspection/inspection_toggle.html" with label="Cooling System" %}
+                            {% include "inspection/inspection_toggle.html" with label="Transmission" %}
+                            {% include "inspection/inspection_toggle.html" with label="Drive Belt" %}
+                            {% include "inspection/inspection_toggle.html" with label="Power Steering" %}
+                        </div>
+                        <!-------------------------------------------------------------------------------------------->
+                        <div class="divider"></div>
+                        <div class="section">
+                            {% include "inspection/inspection_section_title.html" with title="Lights" icon="7" %}
+                            {% include "inspection/inspection_toggle.html" with label="Brake Lights" %}
+                            {% include "inspection/inspection_toggle.html" with label="Tailights" %}
+                            {% include "inspection/inspection_toggle.html" with label="Headlights Low & High" %}
+                        </div>
+                    </form>
+                </div>
+            </div> <!--END: panel-->
+
+        </div> <!--END: col -->
+    </div> <!--END: row -->
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 64px;">
+        <a class="btn-floating btn-large waves-effect waves-light amber darken-2"><i class="material-icons">mode_edit</i></a>
+        <ul>
+            <li><a class="btn-floating blue"><i class="material-icons">reply</i></a></li>
+            <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">save</i></a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function ($) {
+    $(document).ready(function() {
+
+        // Set up tertiary switch capabilities
+        $('.switch label').click(function(e) {
+            e.preventDefault();
+        });
+
+        $('.switch input[type=checkbox]').prop('indeterminate', true);
+
+        $('.switch').children('label').children('.no').click( function () {
+            var checkbox = $(this).siblings('input[type=checkbox]');
+            checkbox.prop('indeterminate', false);
+            checkbox.prop('checked', false);
+        });
+
+        $('.switch').children('label').children('.yes').click( function () {
+            var checkbox = $(this).siblings('input[type=checkbox]');
+            checkbox.prop('indeterminate', false);
+            checkbox.prop('checked', true);
+        });
+
+        // initialize selects and date picker
+        $('select').material_select();
+        $('.datepicker').pickadate();
+
+    });
+}( jQuery ));
+</script>
+{% endblock scripts %}
