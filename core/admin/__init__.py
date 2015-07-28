@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
+from django.contrib.auth.admin import GroupAdmin
 
 from ..models import User, RegistrationProfile
 from .admin_site import *
@@ -7,5 +9,7 @@ from .registration_admin import *
 
 admin.site = NoLemonAdminSite()
 
-admin.site.register(User, user_admin.UserAdmin)
-admin.site.register(RegistrationProfile, registration_admin.RegistrationAdmin)
+admin.site.register(User, UserAdmin)
+admin.site.register(RegistrationProfile, RegistrationAdmin)
+admin.site.register(Group, GroupAdmin)
+

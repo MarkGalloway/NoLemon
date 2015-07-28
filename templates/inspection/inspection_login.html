@@ -1,6 +1,7 @@
 {% extends "inspection/../materialize_base.html" %}
 {% load sass_tags %}
 {% load static %}
+{% load widget_tweaks %}
 
 {%  block css %}
     <link href="{% sass_src "sass/inspection.scss" %}" rel="stylesheet" type="text/css" />
@@ -14,33 +15,41 @@
         <div class="col s12 m10 offset-m1 l8 offset-l2">
 
 
+            <div id="toast-container" class="full-size"></div>
             <div class="card-panel white">
 
                 <div class="card-header grey darken-4">
                     <img class="logo" src="{%  static "img/logos/nolemon.png" %}"/>
                 </div>
 
-                <form>
+                <form action="." method="post">
+                    {% csrf_token %}
                     <div class="section">
 
                         <div class="row">
                             <div class="input-field col s10 offset-s1">
+                                {% with WIDGET_ERROR_CLASS='has-errors' %}
                                 <i class="prefix-inverted material-icons">account_box</i>
-                                <input class="no-move" id="username" placeholder="Username" type="text">
+                                {% render_field form.username class="no-move" placeholder="Username" type="text" %}
+                                {% endwith %}
+                                <div class="errors">{{ form.username.errors.0 }}</div>
                             </div>
                         </div> <!--END: username -->
 
                         <div class="row">
                             <div class="input-field col s10 offset-s1">
                                 <i class="prefix-inverted material-icons">vpn_key</i>
-                                <input class="no-move" id="password" placeholder="Password" type="password">
+                                {% with WIDGET_ERROR_CLASS='has-errors' %}
+                                {% render_field form.password class="no-move" placeholder="Password" type="password"%}
+                                {% endwith %}
+                                <div class="errors">{{ form.password.errors.0 }}</div>
                             </div>
                         </div> <!--END: username -->
 
 
                         <div class="row">
                             <div class="col s10 offset-s1 right-align">
-                                <a class="waves-effect waves-light btn"><i class="material-icons right">arrow_forward</i>Sign In</a>
+                                <button type="submit" name="action" class="waves-effect waves-light btn"><i class="material-icons right">arrow_forward</i>Sign In</button>
                             </div>
                         </div>
                     </div> <!--END: submit -->
@@ -52,3 +61,7 @@
     </div>
 
 {% endblock %}
+
+}
+
+

@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+__all__ = ["Make", "Model", "Trim", "Body", "Transmission", "Fuel", "Engine", "BasicColour", "Colour", "Vehicle"]
+
 
 class Make(models.Model):
     """
@@ -20,7 +22,7 @@ class Model(models.Model):
     model_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
 
     def __str__(self):
-        return self.model_type
+        return "%s: %s" % (self.make, self.model_type)
 
 
 class Trim(models.Model):
@@ -62,6 +64,14 @@ class Fuel(models.Model):
     def __str__(self):
         return self.fuel_type
 
+class Engine(models.Model):
+    """
+    Model representation for a `fuel` instance of a vehicle
+    """
+    engine_type = models.CharField(max_length=30, null=False, blank=False, primary_key=True)
+
+    def __str__(self):
+        return self.engine_type
 
 class BasicColour(models.Model):
     """
@@ -90,11 +100,16 @@ class Vehicle(models.Model):
     """
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="owner")
     description = models.CharField(max_length=250, null=False, blank=True)
+    vin = models.CharField(max_length=20, blank=True, default="")
     car_model = models.ForeignKey(Model)
-    trim = models.ForeignKey(Trim)
-    body = models.ForeignKey(Body)
+    trim = models.ForeignKey(Trim, null=True, blank=True)
+    body = models.ForeignKey(Body, null=True, blank=True)
+    engine = models.ForeignKey(Engine, null=True, blank=True)
     transmission = models.ForeignKey(Transmission)
     fuel_type = models.ForeignKey(Fuel)
     colour = models.ForeignKey(Colour)
-    mileage = models.PositiveIntegerField(null=False, blank=False)
-    year = models.PositiveIntegerField(null=False, blank=False)
+    mileage = models.PositiveIntegerField()
+    year = models.PositiveIntegerField()
+
+    def __str__(self):
+        return "%s: %s" % (self.owner, self.car_model)

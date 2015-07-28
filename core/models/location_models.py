@@ -37,14 +37,6 @@ class Address(models.Model):
     postal_code = models.CharField(max_length=9)
 
     def __str__(self):
-        output = self.street_address
-
-        if self.street_address2:
-            output += ", " + self.street_address2
-
-        output += ", " + self.city
-        output += ", " + self.city.region
-        output += ", " + self.city.region.country
-        output += ", " + self.postal_code
-
-        return output
+        output = [self.street_address, "%s" % self.street_address2 if self.street_address2 else "", self.city, self.city.region, self.city.region.country, self.postal_code]
+        address = ", ".join([str(item) for item in output])
+        return (address[:75] + '...') if len(address) > 75 else address

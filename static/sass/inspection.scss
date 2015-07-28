@@ -34,6 +34,8 @@ $dropdown-hover-bg-color: #efefef;
 html { @extend html;
   min-height: 100%;
 }
+
+
 body {
   @extend body;
   background-image: $background-image;
@@ -70,6 +72,20 @@ input.no-move {
     color: $input-border-color;
 }
 
+.has-errors ~ div.errors {
+  position: relative;
+  top: -15px;
+  font-size: 1rem;
+  color: $error-color;
+}
+
+.has-errors ~ div.errors:before {
+  font-family: FontAwesome;
+  content: "\f06a";
+  margin-right: 6px;
+  display: inline-block;
+}
+
 .icon-text {
   display: inline-block;
   position: relative;
@@ -92,7 +108,16 @@ input.no-move {
   }
 }
 
+#toast-container.full-size {
+  position: relative;
+  top: -20%;
+  right: 0;
+}
 
+.toast.full-size {
+  float: none;
+  font-size: 1.4rem;
+}
 
 form {
   & .divider {

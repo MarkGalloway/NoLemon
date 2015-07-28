@@ -1,8 +1,9 @@
 from django.conf.urls import url
-import inspections.views
+from .views import *
 
 urlpatterns = [
-    url(r'^login/$', inspections.views.InspectionLoginView.as_view(), name='login'),
-    url(r'^list/$', inspections.views.InspectionListView.as_view(), name='list'),
-    url(r'^form/$', inspections.views.InspectionFormView.as_view(), name='form'),
+    url(r'^login/$', InspectionLoginView.as_view(), name='login'),
+    url(r'^logout/$', InspectionLogoutView.as_view(), name='logout'),
+    url(r'^list/$', InspectionListView.as_view(), name='list'),
+    url(r'^form/$', InspectionFormView.as_view(), name='form'),
 ]
