@@ -1,6 +1,14 @@
 
-$(function() {
+(function() {
 
+// Detect browser version
+var div = document.createElement("div");
+div.innerHTML = "<!--[if lt IE 9]><i></i><![endif]-->";
+var isIeLessThan9 = (div.getElementsByTagName("i").length == 1);
+
+/*
+ *  Object for managing AJAX loading of the ads data
+ */
 var adsList = {
     container: $("#ad-list"),
     loading: $('#loading-indicator').hide(),
@@ -56,7 +64,7 @@ var adsList = {
                 ads.appendTo(adsList.container);
 
                 if(next_url) {
-                    adsList.url = next_url
+                    adsList.url = next_url;
                     // Bind scroll listener is there are more results
                     $(window).scroll(adsList._listen);
                 }
@@ -80,8 +88,10 @@ var adsList = {
             adsList._load();
         }
     }
-}
+};
 
+
+// Start Adlist Ajax
 adsList.init();
 
 
@@ -89,25 +99,40 @@ $("#search-form").on("submit", function(event) {
     // Prevent form submission
     event.preventDefault();
 
+    // Build the querystring
     var querystring = $("#search-form :input")
         .filter(function(index, element) {
-            return $(element).val() != "";
+            return $(element).val() !== "";
         })
         .serialize();
 
-    // Detect browser version
-    var div = document.createElement("div");
-    div.innerHTML = "<!--[if lt IE 9]><i></i><![endif]-->";
-    var isIeLessThan9 = (div.getElementsByTagName("i").length == 1);
+    // Set the browser URL
+    isIeLessThan9 ? window.location.search = querystring
+                  : window.history.replaceState({}, document.title,'?' + querystring);
 
-    if(isIeLessThan9) {
-        window.location.search = querystring;
-    }
-    else {
-        window.history.replaceState({}, document.title,'?' + querystring);
-    }
-
+    // Reset the ads list
     adsList.init();
+
+    // Scroll down to results
+    $('html, body').animate({
+        scrollTop: $("#ad-list").offset().top
+    }, 300);
 });
+
+/*
+ *  Handles search form reset
+ */
+$("#search-form").on("reset", function(event) {
+    // Reset the browser URL
+    isIeLessThan9 ? window.location.search = '?'
+                  : window.history.replaceState({}, document.title,'?');
+
+    // Reset the ads list
+    adsList.init();
+
+    // Reset Sliders
+    setTimeout(function() {
+        sliderDefaults();
+    });
 
 });
