@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Django Rest Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
-    'PAGE_SIZE': 3
+    'PAGE_SIZE': 6
 }
 
 # Database
@@ -124,7 +124,6 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, '../templates'),
 )
-
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
