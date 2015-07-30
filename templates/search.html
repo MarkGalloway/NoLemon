@@ -70,57 +70,81 @@
                       </div>
                     </div>
                     <!-- break -->
-                    <!-- Begin Price Range  -->
                     <div class="col-md-6 col-sm-6 col-xs-12">
+                      <!-- Begin Price Range  -->
                       <div class="row">
-                        <div class="form-group">
-                          <label for="price range">Price</label>
-                          <input type="text" id="price-display" readonly class="form-control" style="border:0; color:#F6BE00; font-weight:bold;">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group">
+                            <label for="price range">Price</label>
+                            <input type="text" id="price-display" readonly class="form-control slider-display">
                             <input type="hidden" name="min_price" id="min-price">
                             <input type="hidden" name="max_price" id="max-price">
+                          </div>
                         </div>
-                        <div id="price-range"></div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                          <div id="price-range" class="slider-range"></div>
+                        </div>
                       </div>
-                    </div>
-                    <!-- End Price Range  -->
+                      <!-- End Price Range  -->
 
-                    <!-- Begin Year Range  -->
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <!-- Begin Year Range  -->
                       <div class="row">
-                        <div class="form-group">
-                          <label for="year range">Year</label>
-                          <input type="text" id="year-display" readonly class="form-control" style="border:0; color:#F6BE00; font-weight:bold;">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group">
+                            <label for="year range">Year</label>
+                            <input type="text" id="year-display" readonly class="form-control slider-display">
                             <input type="hidden" name="min_year" id="min-year">
                             <input type="hidden" name="max_year" id="max-year">
+                          </div>
                         </div>
-                        <div id="year-range"></div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                          <div id="year-range" class="slider-range"></div>
+                        </div>
                       </div>
-                    </div>
-                    <!-- End Year Range  -->
-
-                    <!-- Begin Mileage Range  -->
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                     <!-- End Year Range  -->
+                     <!-- Begin Mileage Range  -->
                       <div class="row">
-                        <div class="form-group">
-                          <label for="mileage range">Mileage</label>
-                          <input type="text" id="mileage-display" readonly class="form-control" style="border:0; color:#F6BE00; font-weight:bold;">
-                            <input type="hidden" name="min_mileage" id="min-mileage">
-                            <input type="hidden" name="max_mileage" id="max-mileage">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group">
+                            <label for="mileage range">Mileage</label>
+                            <input type="text" id="mileage-display" readonly class="form-control slider-display">
+                              <input type="hidden" name="min_mileage" id="min-mileage">
+                              <input type="hidden" name="max_mileage" id="max-mileage">
+                          </div>
                         </div>
-                        <div id="mileage-range"></div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                          <div id="mileage-range" class="slider-range"></div>
+                        </div>
                       </div>
                     </div>
                     <!-- End Mileage Range  -->
 
                     <!-- break -->
-                    <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
                       <div class="form-group">
-                        <input type="reset" name="clear" value="Clear" id="clear-button" class="btn btn-warning btn-block">
-                        <input type="submit" name="submit" value="Search" id="search-button" class="btn btn-warning btn-block">
+                        <label for="ordering">Ordering</label>
+                        <select name="ordering" class="form-control">
+                          <option value="">Newest</option>
+                          <option value="date_posted">Oldest</option>
+                          <option value="price">Lowest Price</option>
+                          <option value="-price">Highest Price</option>
+                          <option value="mileage">Lowest Mileage</option>
+                          <option value="-mileage">Highest Mileage</option>
+                        </select>
                       </div>
                     </div>
                   </div>
                   <!-- End Fitler Row-->
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="reset" name="clear" value="Clear" id="clear-button" class="btn btn-warning btn-block">
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="submit" name="submit" value="Search" id="search-button" class="btn btn-warning btn-block">
+                      </div>
+                    </div>
+                  </div>
                 </form>
             </div>
           </div>
@@ -189,27 +213,6 @@
 
           <!--</div>-->
           <!-- end:article -->
-
-          <!-- begin:sidebar -->
-          <!--
-          <div class="col-md-3 col-md-pull-9 sidebar">
-            <div class="widget widget-sidebar widget-white panel">
-              <div class="widget-header collapse-title">
-                Location<a href="#my-location" data-toggle="collapse" class="pull-right"><i class="fa fa-angle-down"></i></a>
-              </div>
-                <div class="panel-collapse collapse in" id="my-location">
-                  <ul class="tierlist">
-                    <li class="active toplevel"><a href="#"><i class="fa fa-map-marker"></i>Alberta</a></li>
-                    <li><a href="#">Edmonton</a></li>
-                    <li><a href="#">Calgary</a></li>
-                    <li><a href="#">Red Deer</a></li>
-                    <li><a href="">Fort McMurray</a></li>
-                  </ul>
-                    </div>
-            </div>
-          </div>-->
-          <!-- end:sidebar -->
-
         </div>
       </div>
     </div>

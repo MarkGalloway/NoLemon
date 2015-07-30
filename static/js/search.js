@@ -102,16 +102,21 @@ $("#price-range").slider({
     animate: 'fast',
     range: true,
     min: 0,
-    max: 50000,
-    step: 500,
-    values: [0, 50000],
+    max: 100000,
+    step: 1000,
+    values: [0, 100000],
     slide: function( event, ui ) {
-      (ui.values[1] > 0)? $("#min-price").val(ui.values[0])
-                        : $("#min-price").val('');
-      (ui.values[1] < 49999)? $("#max-price").val(ui.values[1])
-                            : $("#max-price").val('');
-      (ui.values[1] < 49999)? $("#price-display").val("$" + ui.values[0] + " - $" + ui.values[1])
-                            : $("#price-display").val("$" + ui.values[0] + " - $" + ui.values[1] + " +");
+        (ui.values[0] > 0)? $("#min-price").val(ui.values[0])
+                          : $("#min-price").val('');
+        (ui.values[1] < 99999)? $("#max-price").val(ui.values[1])
+                              : $("#max-price").val('');
+
+        if(ui.values[0] < 1 && ui.values[1] > 99999) {
+            $("#price-display").val("Any");
+        } else {
+            $("#price-display").val((ui.values[0] > 1? "$" + ui.values[0] : "") + " - " +
+                                    (ui.values[1] < 99999? "$" + ui.values[1] : ""));
+        }
     }
 });
 
@@ -134,8 +139,7 @@ $("#year-range").slider({
       if(ui.values[0] < 1901 && ui.values[1] > 2015) {
         $("#year-display").val("Any");
       } else {
-        $("#year-display").val((ui.values[0] > 1900? ui.values[0] : "")
-                                + " - " +
+        $("#year-display").val((ui.values[0] > 1901? ui.values[0] : "") + " - " +
                                (ui.values[1] < 2016? ui.values[1] : ""));
       }
 
@@ -158,12 +162,11 @@ $("#mileage-range").slider({
       (ui.values[1] < 300000)? $("#max-mileage").val(ui.values[1])
                              : $("#max-mileage").val('');
 
-      if(ui.values[0] < 0 && ui.values[1] > 300000) {
+      if(ui.values[0] < 1 && ui.values[1] > 299999) {
         $("#mileage-display").val("Any");
       } else {
-        $("#mileage-display").val((ui.values[0] > 0? ui.values[0] : "")
-                                   + " - " +
-                                  (ui.values[1] < 300000? ui.values[1] : ""));
+        $("#mileage-display").val((ui.values[0] > 1? ui.values[0] : "") + " - " +
+                                  (ui.values[1] < 299999? ui.values[1] : ""));
       }
 
     }
@@ -174,8 +177,7 @@ $("#mileage-range").slider({
  *  Sets initial/default slider settings
  */
 function sliderDefaults(){
-    $("#price-display").val("$" + $("#price-range").slider("values", 0) +
-          " - $" + $("#price-range").slider("values", 1));
+    $("#price-display").val("Any");
     $("#year-display").val("Any");
     $("#mileage-display").val("Any");
 
@@ -230,7 +232,7 @@ $("#search-form").on("reset", function(event) {
 
     // Reset Sliders
     setTimeout(function() {
-        $("#price-range").slider("option", "values", [0, 50000]);
+        $("#price-range").slider("option", "values", [0, 100000]);
         $("#year-range").slider("option", "values", [1900, 2016]);
         $("#mileage-range").slider("option", "values", [0, 300000]);
         sliderDefaults();
