@@ -95,6 +95,94 @@ var adsList = {
 adsList.init();
 
 
+/*
+ * Price Range slider setup
+ */
+$("#price-range").slider({
+    animte: 'fast',
+    range: true,
+    min: 0,
+    max: 50000,
+    step: 500,
+    values: [0, 50000],
+    slide: function( event, ui ) {
+      (ui.values[1] > 0)? $("#min-price").val(ui.values[0])
+                        : $("#min-price").val('');
+      (ui.values[1] < 49999)? $("#max-price").val(ui.values[1])
+                            : $("#max-price").val('');
+      (ui.values[1] < 49999)? $("#price-display").val("$" + ui.values[0] + " - $" + ui.values[1])
+                            : $("#price-display").val("$" + ui.values[0] + " - $" + ui.values[1] + " +");
+    }
+});
+
+/*
+ * Year Range slider setup
+ */
+$("#year-range").slider({
+    animte: 'fast',
+    range: true,
+    min: 1900,
+    max: 2016,
+    step: 1,
+    values: [1900, 2016],
+    slide: function( event, ui ) {
+      (ui.values[0] > 1900)? $("#min-year").val(ui.values[0])
+                           : $("#min-year").val('');
+      (ui.values[1] < 2016)? $("#max-year").val(ui.values[1])
+                           : $("#max-year").val('');
+
+      if(ui.values[0] < 1901 && ui.values[1] > 2015) {
+        $("#year-display").val("Any");
+      } else {
+        $("#year-display").val((ui.values[0] > 1900? ui.values[0] : "")
+                                + " - " +
+                               (ui.values[1] < 2016? ui.values[1] : ""));
+      }
+
+    }
+});
+
+/*
+ * Mileage Range slider setup
+ */
+$("#mileage-range").slider({
+    animte: 'fast',
+    range: true,
+    min: 0,
+    max: 300000,
+    step: 10000,
+    values: [0, 300000],
+    slide: function( event, ui ) {
+      (ui.values[0] > 0)? $("#min-mileage").val(ui.values[0])
+                        : $("#min-mileage").val('');
+      (ui.values[1] < 300000)? $("#max-mileage").val(ui.values[1])
+                             : $("#max-mileage").val('');
+
+      if(ui.values[0] < 0 && ui.values[1] > 300000) {
+        $("#mileage-display").val("Any");
+      } else {
+        $("#mileage-display").val((ui.values[0] > 0? ui.values[0] : "")
+                                   + " - " +
+                                  (ui.values[1] < 300000? ui.values[1] : ""));
+      }
+
+    }
+});
+
+
+function sliderDefaults(){
+    // Register initial slider settings
+    $("#price-display").val("$" + $("#price-range").slider("values", 0) +
+          " - $" + $("#price-range").slider("values", 1));
+    $("#year-display").val("Any");
+    $("#mileage-display").val("Any");
+};
+
+sliderDefaults();
+
+/*
+ *  Handles search form manipualtions
+ */
 $("#search-form").on("submit", function(event) {
     // Prevent form submission
     event.preventDefault();
@@ -136,3 +224,30 @@ $("#search-form").on("reset", function(event) {
     });
 
 });
+
+
+// // Detect refresh button and clear search URL
+// $(window).on("beforeunload", function(event) {
+
+//     window.location.href = window.location.href.split('?')[0];
+//     // event.preventDefault();
+//     // window.history.oushState({}, document.title, '?');
+//     // window.history.pushState({}, null,'bla');
+//     // alert('Handler for .unload() called.');
+//     // window.location = '/search/';
+// });
+
+// // // Detect refresh button and clear search URL
+// $(window).unload(function() {
+//     // window.history.pushState({}, null,'bla');
+//       // alert('Handler for .unload() called.');
+//       window.location.href = window.location.href.split('?')[0];
+// });
+
+// window.onbeforeunload = function(e) {
+//   // return 'Dialog text here.';
+//   alert('BLA for .unload() called.');
+// };
+
+})();
+

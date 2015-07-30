@@ -70,9 +70,49 @@
                       </div>
                     </div>
                     <!-- break -->
+                    <!-- Begin Price Range  -->
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="row">
+                        <div class="form-group">
+                          <label for="price range">Price</label>
+                          <input type="text" id="price-display" readonly class="form-control" style="border:0; color:#F6BE00; font-weight:bold;">
+                            <input type="hidden" name="min_price" id="min-price">
+                            <input type="hidden" name="max_price" id="max-price">
+                        </div>
+                        <div id="price-range"></div>
+                      </div>
                     </div>
+                    <!-- End Price Range  -->
+
+                    <!-- Begin Year Range  -->
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="row">
+                        <div class="form-group">
+                          <label for="year range">Year</label>
+                          <input type="text" id="year-display" readonly class="form-control" style="border:0; color:#F6BE00; font-weight:bold;">
+                            <input type="hidden" name="min_year" id="min-year">
+                            <input type="hidden" name="max_year" id="max-year">
+                        </div>
+                        <div id="year-range"></div>
+                      </div>
                     </div>
+                    <!-- End Year Range  -->
+
+                    <!-- Begin Mileage Range  -->
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="row">
+                        <div class="form-group">
+                          <label for="mileage range">Mileage</label>
+                          <input type="text" id="mileage-display" readonly class="form-control" style="border:0; color:#F6BE00; font-weight:bold;">
+                            <input type="hidden" name="min_mileage" id="min-mileage">
+                            <input type="hidden" name="max_mileage" id="max-mileage">
+                        </div>
+                        <div id="mileage-range"></div>
+                      </div>
                     </div>
+                    <!-- End Mileage Range  -->
+
+                    <!-- break -->
                     <div class="col-md-3 col-sm-3 col-xs-6">
                       <div class="form-group">
                         <input type="reset" name="clear" value="Clear" id="clear-button" class="btn btn-warning btn-block">
