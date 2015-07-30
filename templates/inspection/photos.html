@@ -1,0 +1,130 @@
+{% load static %}
+
+
+
+
+<div class="section"></div>
+
+<div class="row">
+    <div class="col s5 offset-s1">
+
+
+        <div class="ajaximage form-active">
+            <a class="file-link" target="_blank" href="">
+                <img class="file-img" src="{% if form.instance.image_front %}{{ form.instance.image_front.url }}{% else %}{% static "img/upload-placeholder.png" %}{% endif %}"/>
+            </a>
+            <input class="file-path" type="hidden" value="" id="id_image_front" name="image_front">
+            <span class="btn btn-default btn-file" style="width:200px">Front</span>
+            <input type="file" class="file-input">
+            <input class="file-dest" type="hidden" value="/ajaximage/upload/inspection-uploads/0/0/0">
+            <a class="file-remove" href="#remove">Remove</a>
+
+          {% if form.image_front.errors %}<div class="has-errors"></div>{% endif %}
+            <div class="errors">{{ form.image_front.errors.0 }}</div>
+        </div>
+
+    </div>
+
+    <div class="col s4">
+
+        <div class="ajaximage form-active">
+            <a class="file-link" target="_blank" href="">
+                <img class="file-img" src="{% if form.instance.image_back %}{{ form.instance.image_back.url }}{% else %}{% static "img/upload-placeholder.png" %}{% endif %}"/>
+            </a>
+            <input class="file-path" type="hidden" value="" id="id_image_back" name="image_back">
+            <span class="btn btn-default btn-file" style="width:200px">Rear</span>
+            <input type="file" class="file-input">
+            <input class="file-dest" type="hidden" value="/ajaximage/upload/inspection-uploads/0/0/0">
+            <a class="file-remove" href="#remove">Remove</a>
+                                                {% if form.image_back.errors %}<div class="has-errors"></div>{% endif %}
+            <div class="errors">{{ form.image_back.errors.0 }}</div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="section"></div>
+<div class="divider"></div>
+<div class="row">
+    <div class="col s5 offset-s1">
+
+        <div class="ajaximage form-active">
+            <a class="file-link" target="_blank" href="">
+                <img class="file-img" src="{% if form.instance.image_passengers_side %}{{ form.instance.image_passengers_side.url }}{% else %}{% static "img/upload-placeholder.png" %}{% endif %}"/>
+            </a>
+            <input class="file-path" type="hidden" value="" id="id_image_passengers_side" name="image_passengers_side">
+            <span class="btn btn-default btn-file" style="width:200px">Passenger</span>
+            <input type="file" class="file-input">
+            <input class="file-dest" type="hidden" value="/ajaximage/upload/inspection-uploads/0/0/0">
+            <a class="file-remove" href="#remove">Remove</a>
+                        <a class="file-remove" href="#remove">Remove</a>
+                                    {% if form.image_passengers_side.errors %}<div class="has-errors"></div>{% endif %}
+            <div class="errors">{{ form.image_passengers_side.errors.0 }}</div>
+        </div>
+
+    </div>
+    <div class="col s4">
+
+        <div class="ajaximage form-active">
+            <a class="file-link" target="_blank" href="">
+                <img class="file-img" src="{% if form.instance.image_drivers_side %}{{ form.instance.image_drivers_side.url }}{% else %}{% static "img/upload-placeholder.png" %}{% endif %}"/>
+            </a>
+            <input class="file-path" type="hidden" value="" id="id_image_drivers_side" name="image_drivers_side">
+            <span class="btn btn-default btn-file" style="width:200px">Driver's Side</span>
+            <input type="file" class="file-input">
+            <input class="file-dest" type="hidden" value="/ajaximage/upload/inspection-uploads/0/0/0">
+            <a class="file-remove" href="#remove">Remove</a>
+                                    {% if form.image_drivers_side.errors %}<div class="has-errors"></div>{% endif %}
+            <div class="errors">{{ form.image_drivers_side.errors.0 }}</div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="section"></div>
+<div class="divider"></div>
+<div class="row center">
+
+
+
+    <div class="col s5 offset-s1">
+
+        <div class="ajaximage form-active">
+            <a class="file-link" target="_blank" href="">
+                <img class="file-img" src="{% if form.instance.image_dash %}{{ form.instance.image_dash.url }}{% else %}{% static "img/upload-placeholder.png" %}{% endif %}"/>
+            </a>
+            <input class="file-path" type="hidden" value="" id="id_image_dash" name="image_dash">
+            <span class="btn btn-default btn-file" style="width:200px">Dash</span>
+            <input type="file" class="file-input">
+            <input class="file-dest" type="hidden" value="/ajaximage/upload/inspection-uploads/0/0/0">
+            <a class="file-remove" href="#remove">Remove</a>
+            {% if form.image_dash.errors %}<div class="has-errors"></div>{% endif %}
+            <div class="errors">{{ form.image_dash.errors.0 }}</div>
+        </div>
+
+    </div>
+
+    <div class="col s4">
+        <div class="ajaximage form-active">
+            <a class="file-link" target="_blank" href="">
+                <img class="file-img" src="{% if form.instance.image_interior %}{{ form.instance.image_interior.url }}{% else %}{% static "img/upload-placeholder.png" %}{% endif %}"/>
+            </a>
+            <input class="file-path" type="hidden" value="" id="id_image_interior" name="image_interior">
+            <span class="btn btn-default btn-file" style="width:200px">Interior</span>
+            <input type="file" class="file-input">
+            <input class="file-dest" type="hidden" value="/ajaximage/upload/inspection-uploads/0/0/0">
+            <a class="file-remove" href="#remove">Remove</a>
+                        {% if form.image_interior.errors %}<div class="has-errors"></div>{% endif %}
+            <div class="errors">{{ form.image_interior.errors.0 }}</div>
+        </div>
+
+    </div>
+
+
+</div>
+<div class="section"></div>
+
+{{ form.media }}

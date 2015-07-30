@@ -1,0 +1,50 @@
+<div class="section"></div>
+
+<div class="row">
+    <div class="input-field col s5 offset-s1">
+    {% include 'inspection/widgets/input_widget.html' with field=form.vin label="VIN #:" only %}
+    </div>
+
+    <div class="input-field col s5">
+        {% include 'inspection/widgets/input_widget.html' with field=form.mileage label="Mileage:" only %}
+    </div>
+</div>
+
+<div class="section"></div>
+
+<div class="row">
+    <div class="input-field col s5  offset-s1">
+        {% include 'inspection/widgets/input_widget.html' with field=form.car_model label="Car Model:" only %}
+    </div>
+
+    <div class="input-field col s5">
+    {% include 'inspection/widgets/input_widget.html' with field=form.body label="Body:" only %}
+    </div>
+</div>
+
+<div class="section"></div>
+
+<div class="row">
+    <div class="input-field col s5 offset-s1">
+    {% include 'inspection/widgets/input_widget.html' with field=form.transmission label="Transmission:" only %}
+    </div>
+
+    <div class="input-field col s5">
+        {% include 'inspection/widgets/input_widget.html' with field=form.fuel_type label="Fuel Type:" only %}
+    </div>
+</div>
+
+<div class="section"></div>
+
+<div class="row">
+    <div class="input-field col s5 offset-s1">
+    {% include 'inspection/widgets/input_widget.html' with field=form.colour label="Color:" only %}
+    </div>
+
+    <div class="input-field col s5">
+        {% include 'inspection/widgets/input_widget.html' with field=form.year label="Year:" only %}
+    </div>
+</div>
+
+<div class="section"></div>
+

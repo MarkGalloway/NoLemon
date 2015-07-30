@@ -6,21 +6,54 @@
     <link href="{% sass_src "sass/inspection.scss" %}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
+
+
 {% block content %}
     <div class="spinner"></div>
     <div class="row section">
         <div class="col s12">
 
-            <div class="card-panel">
+            <div id="card-form" class="card-panel">
 
-                <div class="card-header center">
-                    <div class="section"></div>
-                    <h5>MULTI-POINT VEHICLE INSPECTION</h5>
-                </div>
+
+                    <div class="row valign-wrapper">
+                        <div class="col s8">
+                            <img class="logo"  src="{%  static "img/logos/nolemon.png" %}"/><h5>&nbspMULTI-POINT INSPECTION</h5>
+                        </div>
+                        <div class="col s4">
+                            {{ form.windshield }}
+
+                             <input name="group1" type="radio" id="test2" checked="checked" />
+      <label class="check-radio good" for="test2"></label>
+                                                         <input name="group1" type="radio" id="test1" />
+      <label class="check-radio fair" for="test1"></label>
+                            <input name="group1" type="radio" id="test3" />
+      <label class="check-radio poor" for="test3">test</label>
+                        </div>
+                    </div>
+
+
+                {{ form.instance. }}
 
                 <div class="section row">
-                    <form class="col s10 offset-s1
-                    ">
+
+                    <form class="col s10 offset-s1">
+
+                        <div class="ajaximage form-active">
+                            <a class="file-link" target="_blank" href>
+                                <img class="file-img" src="{% static "img/upload-placeholder.png" %}"></img>
+                            </a>
+                            <a class="file-remove" href="#remove">Remove</a>
+
+                            <input class="file-path" type="hidden" value="" id="id_images" name="images">
+                            <span class="btn btn-default btn-file ">Upload</span>
+                            <input type="file" class="file-input"/>
+
+                            <input class="file-dest" type="hidden" value="/ajaximage/upload/form-uploads/0/0/0">
+                            <div class="progress active">
+                                <div class="bar"></div>
+                            </div>
+                        </div>
                         <!-------------------------------------------------------------------------------------------->
                         <div class="divider"></div>
                         <div class="section">
@@ -141,8 +174,26 @@
 {% endblock %}
 
 {% block scripts %}
+        {{ form.media }}
 <script>
+
 (function ($) {
+
+
+    $('.btn-file').click(function(e){
+        $(this).siblings(':file').click();
+    });
+
+    $('.file-link').click(function(e){
+        e.preventDefault();
+        $(this).siblings(':file').click();
+    });
+
+    $('.file-remove').click(function(e){
+        e.preventDefault();
+        $(this).siblings('.file-link').children().attr("src", "{% static "img/upload-placeholder.png" %}");
+    });
+
     $(document).ready(function() {
 
         // Set up tertiary switch capabilities

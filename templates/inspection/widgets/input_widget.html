@@ -1,0 +1,4 @@
+{{ field }}
+<label for="{{ field.id_for_label }}" class="{% if field.value %}active{% endif %}">{{ label }}</label>
+{% if field.errors %}<div class="has-errors"></div>{% endif %}
+<div class="errors">{{ field.errors.0 }}</div>

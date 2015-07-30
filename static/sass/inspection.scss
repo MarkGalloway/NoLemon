@@ -27,13 +27,17 @@ $switch-bg-color: $success-color;
 $switch-checked-lever-bg: desaturate(lighten($success-color, 15%), 15%);
 $switch-unchecked-bg: $error-color;
 $switch-unchecked-lever-bg: desaturate(lighten($error-color, 15%), 15%);
+$table-hover-bg-color: color("blue-grey", "lighten-5");
+$table-border-color: color("grey", "lighten-3");
 $dropdown-hover-bg-color: #efefef;
 
 @import "../materialize/sass/materialize";
 
 html { @extend html;
   min-height: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }
+
 
 
 body {
@@ -66,10 +70,43 @@ form {
   margin: (-$card-padding) (-$card-padding) 0 (-$card-padding);
   border-radius: 2px;
   background-color: $card-bg-color;
+
+  &.no-pad {
+    padding: 0;
+    background-color: white;
+    border-bottom: 1px solid #E0E0E0;
+  }
+
+  > .number {
+    display: inline-block;
+    padding: 10px 20px 10px 20px;
+    background-color: $primary-color;
+    color: color("grey", "lighten-3");
+  }
+
+  > .number ~ h5 {
+    margin-left: 20px;
+    position: relative;
+    display: inline-block;
+    top: 4px;
+    margin-top: 0;
+  }
 }
+
+
+
 
 input.no-move {
     color: $input-border-color;
+}
+
+i.boost {
+  position: relative;
+  top: -3px;
+}
+i.unboost {
+  position: relative;
+  top: 4px;
 }
 
 .has-errors ~ div.errors {
@@ -77,6 +114,10 @@ input.no-move {
   top: -15px;
   font-size: 1rem;
   color: $error-color;
+}
+
+.ajaximage > .has-errors ~ div.errors  {
+    top: 0;
 }
 
 .has-errors ~ div.errors:before {
@@ -188,4 +229,125 @@ form {
     padding: 0;
     background-color: #fff;
   }
+}
+
+[type="radio"] + label.Good:after {
+  background-color: $success-color !important;
+}
+
+[type="radio"] + label.Poor:after {
+  background-color: $error-color !important;
+}
+
+[type="radio"] + label.Fair:after {
+  background-color: $secondary-color !important;
+}
+
+[type="radio"] + label.Not-Applicable:after {
+  background-color: color('grey', 'base') !important;
+}
+
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  display: inline-block;
+  height: 25px;
+  line-height: 25px;
+  font-size: 1rem;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
+}
+
+[type="radio"] + label:before,
+[type="radio"] + label:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 4px;
+  width: 20px;
+  height: 20px;
+  z-index: 0;
+}
+
+
+/* Unchecked styles */
+[type="radio"]:not(:checked) + label:before {
+  border-radius: 2px;
+
+}
+
+[type="radio"]:not(:checked) + label:after {
+  border-radius: 2px;
+}
+
+[type="radio"]:checked + label:before {
+  top: -8px;
+  left: 1px;
+  width: 10px;
+  height: 22px;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-right: 4px solid #1B1B1B;
+  border-bottom: 4px solid #101010;
+  -webkit-transform: rotateZ(37deg);
+  transform: rotateZ(37deg);
+  -webkit-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+  z-index: 10;
+}
+
+
+input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+    z-index: -1;
+}
+
+.ajaximage {
+  float: none !important;
+  clear: both;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+}
+
+.ajaximage .file-link {
+  display: block !important;
+}
+.ajaximage img {
+  padding: 5px 0;
+  display: block !important;
+  margin-bottom: 3px;
+  object-position: center; /* Center the image within the element */
+  height: 200px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#previous {
+  position: absolute;
+}
+
+#next {
+  position: absolute;
 }

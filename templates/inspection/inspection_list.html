@@ -11,46 +11,96 @@
 
     <div class="row section">
         <div class="col s12">
+
             <div class="card-panel">
+                {% if not object_list %}
+                    <h3 class="blue-grey-text text-lighten-3 center-align">No Inspections Found...
+                    <a href="{% url 'inspections:form' %}" class="blue-text">add one?</a>
+                    </h3>
+                {% else %}
+                <table class="centered inspections">
+                    <thead>
+                    <tr>
+                        <th>
+                          {% if ordering == order_columns.0 %}
+                              <a class="black-text" href="?{{ order_kwarg }}=4">Inspection # <i class="fa fa-sort-desc boost"></i></a>
+                          {% elif ordering == order_columns.4 %}
+                              <a class="black-text" href="?{{ order_kwarg }}=0">Inspection # <i class="fa fa-sort-asc unboost"></i></a>
+                          {% else %}
+                              <a class="black-text" href="?{{ order_kwarg }}=0">Inspection #</a>
+                          {% endif %}
+                        </th>
 
-                <div class="row">
-                    <div class="col s12">
-                        <table class="centered bordered">
-                            <thead>
-                            <tr>
-                                <th data-field="id">ID</th>
-                                <th data-field="name">Customer</th>
-                                <th data-field="price">Date</th>
-                            </tr>
-                            </thead>
+                        <th>
+                          {% if ordering == order_columns.1 %}
+                              <a class="black-text" href="?{{ order_kwarg }}=5">Customer <i class="fa fa-sort-desc boost"></i></a>
+                          {% elif ordering == order_columns.5 %}
+                              <a class="black-text" href="?{{ order_kwarg }}=1">Customer <i class="fa fa-sort-asc unboost"></i></a>
+                          {% else %}
+                              <a class="black-text" href="?{{ order_kwarg }}=1">Customer</a>
+                          {% endif %}
+                        </th>
 
-                            <tbody>
-                            <tr>
-                                <td>#EASA</td>
-                                <td>Steve Irwin</td>
-                                <td>Sept. 12 2014</td>
-                            </tr>
-                            <tr>
-                                <td>#EASA</td>
-                                <td>Steve Irwin</td>
-                                <td>Sept. 12 2014</td>
-                            </tr>
-                            <tr>
-                                <td>#EASA</td>
-                                <td>Steve Irwin</td>
-                                <td>Sept. 12 2014</td>
-                            </tr>
-                            </tbody>
-                        </table> <!--END: table-->
-                    </div>
-                </div>
-            </div> <!--END: panel-->
+                        <th>
+                          {% if ordering == order_columns.2 %}
+                              <a class="black-text" href="?{{ order_kwarg }}=6">Technician <i class="fa fa-sort-desc boost"></i></a>
+                          {% elif ordering == order_columns.6 %}
+                              <a class="black-text" href="?{{ order_kwarg }}=2">Technician <i class="fa fa-sort-asc unboost"></i></a>
+                          {% else %}
+                              <a class="black-text" href="?{{ order_kwarg }}=2">Technician</a>
+                          {% endif %}
+                        </th>
 
-        </div> <!--END: col -->
-    </div> <!--END: row -->
+                        <th>
+                          {% if ordering == order_columns.3 %}
+                              <a class="black-text" href="?{{ order_kwarg }}=7">Completed <i class="fa fa-sort-desc boost"></i></a>
+                          {% elif ordering == order_columns.7 %}
+                              <a class="black-text" href="?{{ order_kwarg }}=3">Completed <i class="fa fa-sort-asc unboost"></i></a>
+                          {% else %}
+                             <a class="black-text" href="?{{ order_kwarg }}=3">Completed</a>
+                          {% endif %}
+                        </th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for inspection in object_list %}
+                        <tr>
+                            <td><a href="{% url "inspections:vehicles" id=inspection.id %}">{{ inspection.id|default_if_none:"-"|escape }}</a></td>
+                            <td>{{ inspection.customer.get_full_name|default_if_none:"-"|escape }}</td>
+                            <td>{{ inspection.technician|default_if_none:"-"|escape }}</td>
+                            <td>{{ inspection.date_completed|default_if_none:"-"|escape }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table> <!--END: table-->
+              {% endif %}
+
+              {% if is_paginated %}
+                  <div class="pagination right-align">
+                        <span class="page-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?{{ page_kwarg }}={{  page_obj.previous_page_number }}"><i class="fa fa-chevron-circle-left"></i></a>
+                            {% endif %}
+                            <span class="page-current">
+                                {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </span>
+                          {% if page_obj.has_next %}
+                              <a href="?{{ page_kwarg }}={{ page_obj.next_page_number }}"><i class="fa fa-chevron-circle-right"></i></a>
+                          {% endif %}
+                        </span>
+                  </div>
+              {% endif %}
+            </div>
+        </div>
+    </div> <!--END: panel-->
+
 
     <div class="fixed-action-btn" style="bottom: 45px; right: 64px;">
-        <a class="btn-floating btn-large waves-effect waves-light grey darken-4"><i class="material-icons">add</i></a>
+        <a class="btn-floating btn-large waves-effect waves-light amber darken-1" href="{% url 'inspections:form' %}"><i class="material-icons">add</i></a>
     </div>
 
 

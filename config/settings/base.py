@@ -55,11 +55,11 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'rest_framework',
+    'ajaximage',
     'compressor',
     'sass_processor',
     'core',
@@ -104,6 +104,7 @@ DATABASES = {
     }
 }
 
+AJAXIMAGE_AUTH_TEST = lambda u: True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -138,6 +139,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+MEDIA_URL = '/media/'
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.zoho.com'

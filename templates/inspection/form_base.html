@@ -1,0 +1,112 @@
+{% extends "inspection/../materialize_base.html" %}
+{% load sass_tags %}
+{% load static %}
+
+{%  block css %}
+    <link href="{% sass_src "sass/inspection.scss" %}" rel="stylesheet" type="text/css" />
+    <style>.container{display:none}</style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="section"></div>
+
+  <!--- Start: CARD --->
+        <div class="card-panel">
+
+            <div class="card-header no-pad">
+                {% block header %}
+                {% endblock header %}
+            </div>
+
+            <!--- Start: Form --->
+            {{ form.non_field_errors }}
+            <form id="ajax-form" class="col s10 offset-s1" method="post" action=".">
+                {% csrf_token %}
+
+                <div id="ajax-form-content" class="section">
+                    {{ rendered_form_content }}
+                </div>
+
+                <div class="fixed-action-btn" style="bottom: 45px; right: 64px;">
+                    <button type="submit" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">send</i></button>
+                </div>
+            </form> <!--- END: Form --->
+
+            <div style="clear: both"></div>
+        </div><!--- End: CARD --->
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+    (function ($) {
+        var form_options = {
+            url : '{{ form_url }}',
+            type : 'post',
+            dataType: "json",
+            success : success,
+            error : error
+        }
+
+        function success(response, status, xhr, form) {
+            var id = $('#id_id').val();
+            if (id === undefined) {
+                window.location.replace("{{ success_url }}");
+            }
+            else {
+                window.location.replace("{{ success_url }}" + id + "/");
+            }
+
+        }
+
+        function error(xhr, errmsg, err) {
+            var response;
+            console.log(xhr.status + ": " + xhr.responseText);
+            response = JSON.parse(xhr.responseText);
+            $('#ajax-form-content').hide().html(response["form-content"]).fadeIn('slow');
+            Materialize.updateTextFields();
+            $('select').material_select();
+        }
+
+        $(window).load(function() {
+            // When the page has loaded
+            $(".container").fadeIn(1000);
+        });
+
+        $('.btn-file').click(function(e){
+        $(this).siblings(':file').click();
+        });
+
+
+        $('.file-link').click(function(e){
+            e.preventDefault();
+            $(this).siblings(':file').click();
+        });
+
+        $('.file-remove').click(function(e){
+            e.preventDefault();
+            $(this).siblings('.file-link').children().attr("src", "{% static "img/upload-placeholder.png" %}");
+            $(this).hide;
+        });
+
+        $(document).ready(function() {
+            // initialize selects and date picker
+            $('select').each(function() {
+                var first = $(this).children('option:first')
+                var label_text = $(this).next("label").text();
+                if ($(this).val === undefined)
+                    $(this).prepend("<option value='' disabled selected class='label'>" + label_text + "</option>");
+            });
+
+            $('select').material_select();
+            $('#ajax-form').ajaxForm(form_options);
+            $('.datepicker').pickadate();
+        });
+
+    }( jQuery ));
+    </script>
+{% endblock scripts %}

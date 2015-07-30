@@ -10,5 +10,5 @@ from .base import *
 DEBUG = True
 
 TEMPLATE_DEBUG = True
-
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 INSTALLED_APPS += ('debug_toolbar', )

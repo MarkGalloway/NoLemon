@@ -17,9 +17,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField('email address', blank=False, unique=True)
 
-    first_name = models.CharField('first name', max_length=30, blank=True)
+    first_name = models.CharField('first name', max_length=30, default="", blank=False)
 
-    last_name = models.CharField('last name', max_length=30, blank=True)
+    last_name = models.CharField('last name', max_length=30, default="", blank=False)
 
     is_staff = models.BooleanField('admin status', default=False,
         help_text='Gives admin access to the site.')

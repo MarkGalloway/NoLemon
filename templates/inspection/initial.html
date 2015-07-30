@@ -1,0 +1,15 @@
+<div class="row">
+    {% if form.shop %}
+        <div class="input-field col s5 offset-s1">
+        {% include 'inspection/widgets/input_widget.html' with field=form.id label="Enter the 7-9 digit inspection #:" only %}
+        </div>
+
+        <div class="input-field col s5">
+            {% include 'inspection/widgets/input_widget.html' with field=form.shop label="Technician Association:" only %}
+        </div>
+    {% else %}
+        <div class="input-field col s6 offset-s3">
+        {% include 'inspection/widgets/input_widget.html' with field=form.id label="Enter the 7-9 digit inspection #:" only %}
+        </div>
+    {% endif %}
+</div>

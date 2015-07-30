@@ -11,4 +11,5 @@ class ErrorsOnFirstFieldMixin(object):
         """
         if field is None and len(self.fields) > 0:
             field = list(self.fields)[0]
-        super(ErrorsOnFirstFieldMixin, self).add_error(field, error)
+
+        super(ErrorsOnFirstFieldMixin, self).add_error(field, error.messages[0])
