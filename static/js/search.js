@@ -99,7 +99,7 @@ adsList.init();
  * Price Range slider setup
  */
 $("#price-range").slider({
-    animte: 'fast',
+    animate: 'fast',
     range: true,
     min: 0,
     max: 50000,
@@ -119,7 +119,7 @@ $("#price-range").slider({
  * Year Range slider setup
  */
 $("#year-range").slider({
-    animte: 'fast',
+    animate: 'fast',
     range: true,
     min: 1900,
     max: 2016,
@@ -146,7 +146,7 @@ $("#year-range").slider({
  * Mileage Range slider setup
  */
 $("#mileage-range").slider({
-    animte: 'fast',
+    animate: 'fast',
     range: true,
     min: 0,
     max: 300000,
@@ -170,18 +170,28 @@ $("#mileage-range").slider({
 });
 
 
+/*
+ *  Sets initial/default slider settings
+ */
 function sliderDefaults(){
-    // Register initial slider settings
     $("#price-display").val("$" + $("#price-range").slider("values", 0) +
           " - $" + $("#price-range").slider("values", 1));
     $("#year-display").val("Any");
     $("#mileage-display").val("Any");
-};
 
+    $("#min-price").val('');
+    $("#max-price").val('');
+    $("#min-year").val('');
+    $("#max-year").val('');
+    $("#min-mileage").val('');
+    $("#max-mileage").val('');
+}
+
+// Register initial slider settings
 sliderDefaults();
 
 /*
- *  Handles search form manipualtions
+ *  Handles search form manipulations
  */
 $("#search-form").on("submit", function(event) {
     // Prevent form submission
@@ -220,34 +230,13 @@ $("#search-form").on("reset", function(event) {
 
     // Reset Sliders
     setTimeout(function() {
+        $("#price-range").slider("option", "values", [0, 50000]);
+        $("#year-range").slider("option", "values", [1900, 2016]);
+        $("#mileage-range").slider("option", "values", [0, 300000]);
         sliderDefaults();
     });
 
 });
-
-
-// // Detect refresh button and clear search URL
-// $(window).on("beforeunload", function(event) {
-
-//     window.location.href = window.location.href.split('?')[0];
-//     // event.preventDefault();
-//     // window.history.oushState({}, document.title, '?');
-//     // window.history.pushState({}, null,'bla');
-//     // alert('Handler for .unload() called.');
-//     // window.location = '/search/';
-// });
-
-// // // Detect refresh button and clear search URL
-// $(window).unload(function() {
-//     // window.history.pushState({}, null,'bla');
-//       // alert('Handler for .unload() called.');
-//       window.location.href = window.location.href.split('?')[0];
-// });
-
-// window.onbeforeunload = function(e) {
-//   // return 'Dialog text here.';
-//   alert('BLA for .unload() called.');
-// };
 
 })();
 
