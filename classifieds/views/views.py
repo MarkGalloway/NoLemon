@@ -1,4 +1,5 @@
 from rest_framework import viewsets, mixins, filters, renderers
+from django.db.models import F
 
 from ..models import Classified
 from ..serializers import ClassifiedListSerializer
@@ -29,13 +30,13 @@ class ClassifiedViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     queryset = Classified.objects.all().select_related('vehicle', 'vehicle__car_model', 'vehicle__car_model__make',
                                                        'vehicle__colour', 'address', 'address__city', 'address__city__region',
-                                                       'seller').prefetch_related('image')
+                                                       'seller').prefetch_related('image').annotate(mileage=F('vehicle__mileage'))
     renderer_classes = (renderers.TemplateHTMLRenderer, renderers.JSONRenderer)
     template_name = 'ad_fragment.html'
     serializer_class = ClassifiedListSerializer
     filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter,)
     filter_class = ClassifiedFilter
-    ordering_fields = ('date_posted', 'price', 'views')
+    ordering_fields = ('date_posted', 'price', 'views', 'mileage')
     ordering = ('-date_posted', )
     search_fields = ('vehicle__description', 'vehicle__car_model__make__make_type', 'vehicle__car_model__model_type',
                      'vehicle__colour__basic_colour__colour_name')
